@@ -1,14 +1,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
-
 class Input extends StatelessWidget {
   final String hint;
   final int maxLines;
-  const Input({super.key, required this.hint, this.maxLines = 1});
+  final TextEditingController? controller;
+
+  const Input({
+    super.key,
+    required this.hint,
+    this.maxLines = 1,
+    this.controller,
+  });
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hint,

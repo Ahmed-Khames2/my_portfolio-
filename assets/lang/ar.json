@@ -115,6 +115,48 @@
 
   "education_udemy_title": "معسكر تطوير فلاتر",
   "education_udemy_subtitle": "Udemy — 2023",
-  "education_udemy_details": "مشاريع عملية باستخدام Flutter وDart، Firebase وREST APIs"
+  "education_udemy_details": "مشاريع عملية باستخدام Flutter وDart، Firebase وREST APIs",
+  
+  "experience_title": "الخبرات",
+
+  "outlier_title": "مساهم حر — Outlier AI",
+  "outlier_period": "2024",
+  "outlier_desc": "شاركت في مشاريع تدريب الذكاء الاصطناعي لتحسين دقة وأداء النماذج. أنجزت المهام عن بعد كفريلانسر.",
+  "outlier_tech1": "ذكاء اصطناعي",
+  "outlier_tech2": "هندسة البرومبت",
+  "outlier_tech3": "عمل عن بعد",
+
+  "depi_title": "مبادرة رواد مصر الرقمية (DEPI)",
+  "depi_period": "2024 — حتى الآن",
+  "depi_desc": "مبادرة قومية للتدريب على تطوير تطبيقات Flutter، وهندسة نظيفة، ومشاريع عملية.",
+  "depi_tech1": "Flutter",
+  "depi_tech2": "Bloc",
+  "depi_tech3": "تصميم واجهات",
+  "depi_tech4": "Dart",
+
+  "os_title": "مشروع جدولة أنظمة التشغيل (مشروع جامعي)",
+  "os_period": "2024",
+  "os_desc": "تنفيذ خوارزميات جدولة وحدة المعالجة (FCFS, SJF, Round Robin, Priority) كجزء من مقرر نظم التشغيل.",
+  "os_tech1": "تصور",
+  "os_tech2": "خوارزميات",
+  "os_tech3": "مفاهيم نظم التشغيل",
+  
+  "projectsTitle": "المشاريع",
+  "alqudsTitle": "القدس",
+  "alqudsDescription": "تطبيق ديني شامل بدون إنترنت.",
+  "alqudsFullDesc": "✨ كل ما تحتاجه في تطبيق ديني واحد: القرآن، الأذكار، ومواقيت الصلاة بدون إنترنت!",
+  "ecomTitle": "تطبيق المتجر",
+  "ecomDescription": "تطبيق متجر بسيط لتصفح المنتجات، عرض التفاصيل، وإضافة المنتجات للسلة مع تسجيل الدخول بالفirebase.",
+  "ecomFullDesc": "هذا المشروع هو تطبيق متجر إلكتروني أساسي مبني باستخدام Flutter...",
+  "todoTitle": "تطبيق المهام",
+  "todoDescription": "إدارة المهام بشكل مبسط.",
+  "todoFullDesc": "نظم مهامك اليومية وزود إنتاجيتك.",
+  "install": "تثبيت",
+  "about_app": "حول هذا التطبيق",
+  "version": "الإصدار",
+  "updated_on": "تم التحديث في",
+  "downloads": "عدد التنزيلات",
+  "size": "الحجم",
+  "by_ahmed": "بواسطة أحمد خميس"
 
 }

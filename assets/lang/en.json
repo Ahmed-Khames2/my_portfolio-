@@ -114,5 +114,51 @@
 
   "education_udemy_title": "Flutter Development Bootcamp",
   "education_udemy_subtitle": "Udemy — 2023",
-  "education_udemy_details": "Hands-on projects with Flutter & Dart, Firebase, REST APIs"
+  "education_udemy_details": "Hands-on projects with Flutter & Dart, Firebase, REST APIs",
+
+  "experience_title": "Experience",
+
+  "outlier_title": "Freelance Contributor — Outlier AI",
+  "outlier_period": "2024",
+  "outlier_desc": "Worked on AI training projects improving model accuracy and performance. Delivered tasks remotely as a freelancer.",
+  "outlier_tech1": "AI",
+  "outlier_tech2": "Prompt Engineering",
+  "outlier_tech3": "Remote Work",
+
+  "depi_title": "Digital Egypt Pioneers Initiative (DEPI)",
+  "depi_period": "2024 — Present",
+  "depi_desc": "National initiative training on Flutter development, clean architecture, and real-world projects.",
+  "depi_tech1": "Flutter",
+  "depi_tech2": "Bloc",
+  "depi_tech3": "UI/UX",
+  "depi_tech4": "Dart",
+
+  "os_title": "Operating System Scheduler (College Project)",
+  "os_period": "2024",
+  "os_desc": "Implemented CPU scheduling algorithms (FCFS, SJF, Round Robin, Priority) as part of Operating Systems coursework.",
+  "os_tech1": "Visualization",
+  "os_tech2": "Algorithms",
+  "os_tech3": "OS Concepts",
+
+  
+  "projectsTitle": "Projects",
+  "alqudsTitle": "AlQuds",
+  "alqudsDescription": "A complete Islamic app without internet access.",
+  "alqudsFullDesc": "ALQuds ✨ All-in-one Islamic app: Quran, Azkar, and Prayer times offline!",
+  "ecomTitle": "E-Commerce App",
+  "ecomDescription": "A simple e-commerce application to browse products, view details, and add items to the cart with Firebase authentication.",
+  "ecomFullDesc": "This project is a basic E-Commerce application built with Flutter...",
+  "todoTitle": "ToDo App",
+  "todoDescription": "Task management made simple.",
+  "todoFullDesc": "Organize your daily tasks and boost productivity.",
+  "install": "Install",
+  "about_app": "About this app",
+  "version": "Version",
+  "updated_on": "Updated on",
+  "downloads": "Downloads",
+  "size": "Size",
+  "by_ahmed": "by Ahmed Khamis"
+
+
+
 }

@@ -21,17 +21,66 @@ Future<void> openUrl(String url) async {
 }
 
 /* ========================= SMALL WIDGETS ========================= */
+
 class SectionTitle extends StatelessWidget {
   final String text;
   const SectionTitle(this.text, {super.key});
+
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
+
     return Row(
       children: [
-        Text(text, style: t.headlineMedium),
-        const SizedBox(width: 10),
-        Expanded(child: Container(height: 1, color: AppColors.divider)),
+        // النص
+        Text(
+              text,
+              style: t.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+                letterSpacing: 1.2,
+                shadows: [
+                  Shadow(
+                    color: AppColors.primary.withOpacity(0.4),
+                    blurRadius: 8,
+                    offset: const Offset(2, 2),
+                  ),
+                ],
+              ),
+            )
+            .animate()
+            .slideX(
+              begin: -0.2,
+              end: 0,
+              duration: 500.ms,
+              curve: Curves.easeOut,
+            )
+            .fadeIn(duration: 500.ms),
+
+        const SizedBox(width: 12),
+
+        // الخط الديكوري
+        Expanded(
+          child: Container(
+                height: 3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.textPrimary.withOpacity(0.9),
+                      AppColors.textPrimary.withOpacity(0.1),
+                    ],
+                  ),
+                ),
+              )
+              .animate(delay: 250.ms) // staggered delay
+              .scaleX(
+                begin: 0,
+                end: 1,
+                duration: 600.ms,
+                curve: Curves.easeOut,
+              ),
+        ),
       ],
     );
   }

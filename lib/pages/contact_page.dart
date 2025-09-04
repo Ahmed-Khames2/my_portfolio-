@@ -5,6 +5,7 @@ import 'package:my_portfolio2/pages/PdfViewerPage.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
 import 'package:my_portfolio2/widgets/custom_input.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
+import 'package:my_portfolio2/widgets/form_contact.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
@@ -34,8 +35,10 @@ class ContactSection extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) =>
-                        const PdfViewerPage(assetPath: 'assets/cv/my_cv.pdf'),
+                    builder:
+                        (_) => const PdfViewerPage(
+                          assetPath: 'assets/CV_Ahmed_Khames.pdf',
+                        ),
                   ),
                 );
               },
@@ -50,31 +53,7 @@ class ContactSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 24),
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.divider),
-          ),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Input(hint: "your_name".tr(context)),
-              const SizedBox(height: 10),
-              Input(hint: "your_email".tr(context)),
-              const SizedBox(height: 10),
-              Input(hint: "your_message".tr(context), maxLines: 5),
-              const SizedBox(height: 12),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("send_message".tr(context)),
-                ),
-              ),
-            ],
-          ),
-        ),
+        FormContact(),
       ],
     );
   }

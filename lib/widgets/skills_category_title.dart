@@ -15,44 +15,31 @@ class SkillCategoryTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
+    final isMobile = MediaQuery.of(context).size.width < 400;
 
-    return Row(
-      children: [
-        ShaderMask(
-          shaderCallback:
-              (bounds) => gradient.createShader(
-                Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-              ),
-          child: Icon(icon, size: 36, color: Colors.white),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Stack(
-            alignment: Alignment.centerLeft,
-            children: [
-              // Container(
-              //   height: 2,
-              //   margin: const EdgeInsets.only(left: 8),
-              //   decoration: BoxDecoration(
-              //     gradient: gradient,
-              //     borderRadius: BorderRadius.circular(2),
-              //   ),
-              // ),
-              Text(
-                title,
-                style: t.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  foreground:
-                      Paint()
-                        ..shader = gradient.createShader(
-                          const Rect.fromLTWH(0, 0, 200, 70),
-                        ),
-                ),
-              ),
-            ],
+    return ShaderMask(
+      shaderCallback:
+          (bounds) => gradient.createShader(
+            Rect.fromLTWH(0, 0, bounds.width, bounds.height),
           ),
-        ),
-      ],
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: isMobile ? 24 : 32, color: Colors.white),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: t.titleLarge?.copyWith(
+                fontSize: isMobile ? 16 : 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // ShaderMask محتاج لون أبيض
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

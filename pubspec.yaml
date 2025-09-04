@@ -46,6 +46,7 @@ dependencies:
   flutter_localization: ^0.3.3
   animated_text_kit: ^4.2.3
   scrollable_positioned_list: ^0.3.8
+  http: ^1.5.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lang/
+    - assets/CV_Ahmed_Khames.pdf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
