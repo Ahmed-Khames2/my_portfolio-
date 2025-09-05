@@ -3,7 +3,8 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "76c2c6c7eb2c957b743094f5864a597e",
+const RESOURCES = {"404.html": "458b8f8536960d6acfdb7209e25d1505",
+"assets/AssetManifest.bin": "76c2c6c7eb2c957b743094f5864a597e",
 "assets/AssetManifest.bin.json": "d5628b218804dd3cfa26291edd05a85d",
 "assets/AssetManifest.json": "23d178cbfdb33ff0efb485376641b2ca",
 "assets/assets/CV_Ahmed_Khames.pdf": "348030593e679976396ba44855623ed9",
@@ -66,7 +67,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "76c2c6c7eb2c957b743094f5864a597e
 "canvaskit/skwasm_st.wasm": "56c3973560dfcbf28ce47cebe40f3206",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "flutter.js": "76f08d47ff9f5715220992f993002504",
-"flutter_bootstrap.js": "2450d934523f8784989b4f4a24063ce4",
+"flutter_bootstrap.js": "d92561191b43a8da8a0fc602315c96f5",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
