@@ -160,6 +160,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/models/project_data.dart';
 import 'package:my_portfolio2/widgets/custom_carousel_project.dart';
+import 'package:my_portfolio2/widgets/custom_fotter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsPage extends StatelessWidget {
@@ -310,8 +311,8 @@ class ProjectDetailsPage extends StatelessWidget {
                 ],
               ),
             ),
-
-            const SizedBox(height: 40),
+            Footer(),
+            // const SizedBox(height: 40),
           ],
         ),
       ),

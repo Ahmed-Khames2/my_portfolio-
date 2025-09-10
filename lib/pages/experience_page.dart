@@ -10,84 +10,87 @@ class ExperienceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 700;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SectionTitle("experience_title".tr(context)),
-        const SizedBox(height: 18),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 12 : 20,
-            vertical: isMobile ? 12 : 20,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SectionTitle("experience_title".tr(context)),
+          const SizedBox(height: 18),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 12 : 20,
+              vertical: isMobile ? 12 : 20,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: AppColors.divider),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.03),
+                  blurRadius: 14,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                ExperienceRow(
+                  accentColor: Colors.blue,
+                  imagePath: 'assets/images/ot.jpeg',
+                  title: "outlier_title".tr(context),
+                  period: "outlier_period".tr(context),
+                  description: "outlier_desc".tr(context),
+                  techs: [
+                    "outlier_tech1".tr(context),
+                    "outlier_tech2".tr(context),
+                    "outlier_tech3".tr(context),
+                  ],
+                  githubUrl: null,
+                  demoUrl: null,
+                ),
+                const SizedBox(height: 12),
+                Divider(color: AppColors.divider),
+                const SizedBox(height: 12),
+                ExperienceRow(
+                  accentColor: Colors.white,
+                  imagePath: 'assets/images/DEPI.jpg',
+                  title: "depi_title".tr(context),
+                  period: "depi_period".tr(context),
+                  description: "depi_desc".tr(context),
+                  techs: [
+                    "depi_tech1".tr(context),
+                    "depi_tech2".tr(context),
+                    "depi_tech3".tr(context),
+                    "depi_tech4".tr(context),
+                  ],
+                  githubUrl: null,
+                  demoUrl: null,
+                ),
+                const SizedBox(height: 12),
+                Divider(color: AppColors.divider),
+                const SizedBox(height: 12),
+                ExperienceRow(
+                  accentColor: AppColors.primary,
+                  imagePath: 'assets/images/cp.png',
+                  title: "os_title".tr(context),
+                  period: "os_period".tr(context),
+                  description: "os_desc".tr(context),
+                  techs: [
+                    "os_tech1".tr(context),
+                    "os_tech2".tr(context),
+                    "os_tech3".tr(context),
+                  ],
+                  githubUrl: 'https://github.com/interesta22/OS-Project',
+                  demoUrl: null,
+                ),
+              ],
+            ),
           ),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: AppColors.divider),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.03),
-                blurRadius: 14,
-                offset: const Offset(0, 6),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              ExperienceRow(
-                accentColor: Colors.blue,
-                imagePath: 'assets/images/ot.jpeg',
-                title: "outlier_title".tr(context),
-                period: "outlier_period".tr(context),
-                description: "outlier_desc".tr(context),
-                techs: [
-                  "outlier_tech1".tr(context),
-                  "outlier_tech2".tr(context),
-                  "outlier_tech3".tr(context),
-                ],
-                githubUrl: null,
-                demoUrl: null,
-              ),
-              const SizedBox(height: 12),
-              Divider(color: AppColors.divider),
-              const SizedBox(height: 12),
-              ExperienceRow(
-                accentColor: Colors.white,
-                imagePath: 'assets/images/DEPI.jpg',
-                title: "depi_title".tr(context),
-                period: "depi_period".tr(context),
-                description: "depi_desc".tr(context),
-                techs: [
-                  "depi_tech1".tr(context),
-                  "depi_tech2".tr(context),
-                  "depi_tech3".tr(context),
-                  "depi_tech4".tr(context),
-                ],
-                githubUrl: null,
-                demoUrl: null,
-              ),
-              const SizedBox(height: 12),
-              Divider(color: AppColors.divider),
-              const SizedBox(height: 12),
-              ExperienceRow(
-                accentColor: AppColors.primary,
-                imagePath: 'assets/images/cp.png',
-                title: "os_title".tr(context),
-                period: "os_period".tr(context),
-                description: "os_desc".tr(context),
-                techs: [
-                  "os_tech1".tr(context),
-                  "os_tech2".tr(context),
-                  "os_tech3".tr(context),
-                ],
-                githubUrl: 'https://github.com/interesta22/OS-Project',
-                demoUrl: null,
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

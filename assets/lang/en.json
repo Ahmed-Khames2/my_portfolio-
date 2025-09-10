@@ -1,7 +1,8 @@
 {
   
-  "cover": "Cover",
-  "about": "About",
+  
+  "cover": "Home",
+  "about": "About Me",
   "education": "Education",
   "skills": "Skills",
   "experience": "Experience",
@@ -9,7 +10,12 @@
   "projects": "Projects",
   "achievements": "Achievements",
   "testimonials": "Testimonials",
-  "contact": "Contact",
+  "contact": "Contact", 
+  "Ahmed":"Ahmed ",
+  "Khames":"Khames",
+
+
+  
   "hi_im": "Hi, I'm Ahmed Khamis",
   "junior": "Junior ",
   "flutter_dev": "Flutter Developer",
@@ -157,8 +163,14 @@
   "updated_on": "Updated on",
   "downloads": "Downloads",
   "size": "Size",
-  "by_ahmed": "by Ahmed Khamis"
+  "by_ahmed": "by Ahmed Khamis",
 
-
+  "projects": "Projects",
+  "alquds_title": "AlQuds",
+  "alquds_desc": "An offline Islamic app with Quran, Azkar, and Prayer Times.",
+  "ecom_title": "E-Commerce App",
+  "ecom_desc": "A simple e-commerce application with Firebase authentication.",
+  "todo_title": "ToDo App",
+  "todo_desc": "Description coming soon"
 
 }

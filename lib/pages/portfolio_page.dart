@@ -9,7 +9,6 @@ import 'package:my_portfolio2/pages/experience_page.dart';
 import 'package:my_portfolio2/pages/projects_page.dart';
 import 'package:my_portfolio2/pages/services_page.dart';
 import 'package:my_portfolio2/pages/skills_page.dart';
-import 'package:my_portfolio2/pages/testmonials_page.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
 import 'package:my_portfolio2/utils/seperator.dart';
 import 'package:my_portfolio2/widgets/cusom_TapBar.dart';
@@ -34,7 +33,6 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
   final _servicesKey = GlobalKey();
   final _projectsKey = GlobalKey();
   final _achievementsKey = GlobalKey();
-  final _testimonialsKey = GlobalKey();
   final contactKey = GlobalKey();
 
   late AnimationController _bgController;
@@ -55,40 +53,42 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
     super.dispose();
   }
 
+  /// Helper function to wrap widgets in SliverToBoxAdapter
+  Widget _sliver({Key? key, required Widget child}) {
+    return SliverToBoxAdapter(key: key, child: child);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
         onNav: (section) {
           switch (section) {
-            case 'Cover':
+            case 'cover':
               goTo(_coverKey);
               break;
-            case 'About':
+            case 'about':
               goTo(_aboutKey);
               break;
-            case 'Education':
+            case 'education':
               goTo(_educationKey);
               break;
-            case 'Skills':
+            case 'skills':
               goTo(_skillsKey);
               break;
-            case 'Experience':
+            case 'experience':
               goTo(_experienceKey);
               break;
-            case 'Services':
+            case 'services':
               goTo(_servicesKey);
               break;
-            case 'Projects':
+            case 'projects':
               goTo(_projectsKey);
               break;
-            case 'Achievements':
+            case 'achievements':
               goTo(_achievementsKey);
               break;
-            case 'Testimonials':
-              goTo(_testimonialsKey);
-              break;
-            case 'Contact':
+            case 'contact':
               goTo(contactKey);
               break;
           }
@@ -96,52 +96,79 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
       ),
       body: Stack(
         children: [
-          // 🎨 الخلفية المتحركة مرتبطة بالـ AnimationController
-          Positioned.fill(child: CodingBackground(controller: _bgController)),
+          /// 🎨 الخلفية المتحركة
+          Positioned.fill(
+            child: RepaintBoundary(
+              child: CodingBackground(controller: _bgController),
+            ),
+          ),
 
-          // 💻 المحتوى فوق الخلفية
-          SingleChildScrollView(
+          /// 💻 المحتوى باستخدام Slivers
+          CustomScrollView(
             controller: _scroll,
-            child: Column(
-              children: [
-                Separator(),
-                Section(
-                  key: _coverKey,
+            slivers: [
+              _sliver(
+                key: _coverKey,
+                child: Section(
                   maxWidth: 1200,
                   padTop: 0,
                   padBottom: 0,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: const CoverSection(),
-                  ),
+                  child: CoverSection(contactKey: contactKey),
                 ),
-                Separator(),
-                Section(key: _aboutKey, child: const AboutSection()),
-                Separator(),
-                Section(key: _educationKey, child: const EducationSection()),
-                Separator(),
-                Section(key: _skillsKey, child: const SkillsSection()),
-                Separator(),
-                Section(key: _experienceKey, child: const ExperienceSection()),
-                Separator(),
-                Section(key: _servicesKey, child: const ServicesSection()),
-                Separator(),
-                Section(key: _projectsKey, child: const ProjectsSection()),
-                Separator(),
-                Section(
-                  key: _achievementsKey,
-                  child:  AchievementsSection(),
-                ),
-                Separator(),
-                Section(
-                  key: _testimonialsKey,
-                  child: const TestimonialsSection(),
-                ),
-                Separator(),
-                Section(key: contactKey, child: const ContactSection()),
-                const Footer(),
-              ],
-            ),
+              ),
+              _sliver(child: SizedBox(height: 20)),
+
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: _aboutKey,
+                child: Section(child: const AboutSection()),
+              ),
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: _educationKey,
+                child: Section(child: const EducationSection()),
+              ),
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: _skillsKey,
+                child: Section(child: const SkillsSection()),
+              ),
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: _experienceKey,
+                child: Section(child: const ExperienceSection()),
+              ),
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: _servicesKey,
+                child: Section(child: const ServicesSection()),
+              ),
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: _projectsKey,
+                child: Section(child: const ProjectsSection()),
+              ),
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: _achievementsKey,
+                child: Section(child: AchievementsSection()),
+              ),
+              _sliver(child: Separator()),
+
+              _sliver(
+                key: contactKey,
+                child: Section(child: const ContactSection()),
+              ),
+
+              _sliver(child: const Footer()),
+            ],
           ),
         ],
       ),

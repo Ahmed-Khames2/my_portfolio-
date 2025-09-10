@@ -1,23 +1,27 @@
-
+// custom_input.dart
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
+
 class Input extends StatelessWidget {
   final String hint;
   final int maxLines;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   const Input({
     super.key,
     required this.hint,
     this.maxLines = 1,
     this.controller,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       maxLines: maxLines,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hint,
         filled: true,

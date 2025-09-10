@@ -54,9 +54,7 @@ class _SectionState extends State<Section> with SingleTickerProviderStateMixin {
 
     return Stack(
       children: [
-        Positioned.fill(
-          child: CodingBackground(controller: _controller),
-        ),
+        Positioned.fill(child: CodingBackground(controller: _controller)),
         content,
       ],
     );

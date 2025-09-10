@@ -1,47 +1,6 @@
-// import 'package:flutter/material.dart';
-// import 'package:my_portfolio2/core/app_colors.dart';
-// import 'package:my_portfolio2/core/app_locallizatin.dart';
-// import 'package:my_portfolio2/widgets/custom_input.dart';
-
-// class FormContact extends StatelessWidget {
-//   const FormContact({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         color: AppColors.surface,
-//         borderRadius: BorderRadius.circular(16),
-//         border: Border.all(color: AppColors.divider),
-//       ),
-//       padding: const EdgeInsets.all(16),
-//       child: Column(
-//         children: [
-//           Input(hint: "your_name".tr(context)),
-//           const SizedBox(height: 10),
-//           Input(hint: "your_email".tr(context)),
-//           const SizedBox(height: 10),
-//           Input(hint: "your_message".tr(context), maxLines: 5),
-//           const SizedBox(height: 12),
-//           Align(
-//             alignment: Alignment.centerRight,
-//             child: ElevatedButton(
-//               onPressed: () {},
-//               child: Text("send_message".tr(context)),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_portfolio2/core/app_colors.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/widgets/custom_input.dart';
 
 class FormContact extends StatefulWidget {
@@ -52,17 +11,25 @@ class FormContact extends StatefulWidget {
 }
 
 class _FormContactState extends State<FormContact> {
+  final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final messageController = TextEditingController();
 
+  bool _isLoading = false;
+
+  final String scriptUrl =
+      "https://script.google.com/macros/s/AKfycbyF1YbPhpky6NyjwmEP88mqiJX1Sj-4eRdx-KMPo5-wbJpPf_lWvaEiR4IpV_cqZFX6/exec";
+
   Future<void> sendMessage() async {
-    const url =
-        "https://script.google.com/macros/s/AKfycbzv1Mg_KGMi7DG4SEHrk0yF4CxgS5GHEXzL1HZSSDypJ3bnvObgjH3q_N_KFIwJF7fY/exec";
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
 
     try {
       final response = await http.post(
-        Uri.parse(url),
+        Uri.parse(scriptUrl),
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
         body: {
           "name": nameController.text,
           "email": emailController.text,
@@ -70,56 +37,111 @@ class _FormContactState extends State<FormContact> {
         },
       );
 
-      if (response.statusCode == 200) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("✅ Message sent successfully!")));
-        nameController.clear();
-        emailController.clear();
-        messageController.clear();
-      } else {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("❌ Failed to send message.")));
-      }
+      // ✅ أي استجابة نعتبرها نجاح
+      nameController.clear();
+      emailController.clear();
+      messageController.clear();
+
+      FocusScope.of(context).unfocus();
+
+      _showDialog("✅ Message Sent", "Your message has been sent successfully!");
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("⚠️ Error: $e")),
-        // ignore: avoid_print
-      );
+      _showDialog("⚠️ Error", "Something went wrong.\n$e");
       print(e);
+    } finally {
+      setState(() => _isLoading = false);
     }
+  }
+
+  void _showDialog(String title, String message) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            title: Text(title),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  FocusScope.of(
+                    context,
+                  ).unfocus(); // ✅ يطرد المؤشر من أي TextField
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider),
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Input(hint: "your_name".tr(context), controller: nameController),
-          const SizedBox(height: 10),
-          Input(hint: "your_email".tr(context), controller: emailController),
-          const SizedBox(height: 10),
-          Input(
-            hint: "your_message".tr(context),
-            maxLines: 5,
-            controller: messageController,
+    return Form(
+      key: _formKey,
+      child: AbsorbPointer(
+        // ✅ يمنع اللعب في الحقول أثناء اللودينج
+        absorbing: _isLoading,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.divider),
           ),
-          const SizedBox(height: 12),
-          Align(
-            alignment: Alignment.centerRight,
-            child: ElevatedButton(
-              onPressed: sendMessage,
-              child: Text("send_message".tr(context)),
-            ),
+          child: Column(
+            children: [
+              Input(
+                hint: "Your Name",
+                controller: nameController,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? "Enter your name"
+                            : null,
+              ),
+              const SizedBox(height: 10),
+              Input(
+                hint: "Your Email",
+                controller: emailController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) return "Enter your email";
+                  if (!RegExp(
+                    r"^[\w-\.]+@([\w-]+\.)+[\w]{2,4}",
+                  ).hasMatch(value)) {
+                    return "Enter a valid email";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 10),
+              Input(
+                hint: "Your Message",
+                maxLines: 5,
+                controller: messageController,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? "Enter your message"
+                            : null,
+              ),
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerRight,
+                child:
+                    _isLoading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                          onPressed: sendMessage,
+                          child: const Text("Send Message"),
+                        ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

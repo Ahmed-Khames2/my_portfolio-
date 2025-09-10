@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:animated_text_kit/animated_text_kit.dart'; // 📌 مهم للـ typewriter
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/pages/portfolio_page.dart';
+import 'package:my_portfolio2/utils/helpers.dart';
 
 class CoverSection extends StatelessWidget {
-  const CoverSection({super.key});
+  final GlobalKey contactKey; // ✅ متغير جديد
+
+  const CoverSection({super.key, required this.contactKey});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class CoverSection extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: isMobile ? 30 : 60,
+        vertical: isMobile ? 0.0 : 70,
         horizontal: isMobile ? 16 : 40,
       ),
       decoration: BoxDecoration(
@@ -52,7 +53,7 @@ class CoverSection extends StatelessWidget {
                         ? CrossAxisAlignment.center
                         : CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
 
                   // ===== العنوان الرئيسي بأنيميشن الكتابة =====
                   AnimatedTextKit(
@@ -199,13 +200,12 @@ class CoverSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 60),
+                  SizedBox(height: 50),
                   // Spacer(),
                   // ===== زرار Contact Me =====
                   ElevatedButton.icon(
                         onPressed: () {
-                          // TODO: استدعاء الكونتاكت
-                          // PortfolioOnePage.scrollToContact();
+                          goTo(contactKey);
                         },
                         icon: const Icon(
                           Icons.mail,
@@ -244,62 +244,82 @@ class CoverSection extends StatelessWidget {
           ),
 
           // ===== RIGHT SIDE (صورة الموبايل) =====
-          Expanded(
-            flex: isMobile ? 0 : 1,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: isMobile ? 220 : (isTablet ? 320 : 420),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                            width: isMobile ? 150 : (isTablet ? 200 : 240),
-                            height: isMobile ? 220 : (isTablet ? 320 : 420),
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(32),
-                              border: Border.all(
-                                color: AppColors.divider,
-                                width: 3,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 8),
-                                ),
-                              ],
-                            ),
-                            child: Center(
-                              child: FlutterLogo(
-                                size: isMobile ? 80 : (isTablet ? 110 : 140),
-                              ),
-                            ),
-                          )
-                          .animate()
-                          .fadeIn(duration: 500.ms)
-                          .scale(begin: const Offset(.95, .95)),
-                      // Positioned(
-                      //   bottom: -20,
-                      //   right: locale == "ar" ? null : 40,
-                      //   left: locale == "ar" ? 40 : null,
-                      //   child: const FaIcon(
-                      //     FontAwesomeIcons.code,
-                      //     color: Colors.cyan,
-                      //     size: 28,
-                      //   ).animate().fadeIn(duration: 700.ms).slideX(begin: .3),
-                      // ),
-                    ],
-                  ),
-                ),
+          MobileImage(isMobile: isMobile, isTablet: isTablet),
+        ],
+      ),
+    );
+  }
+}
 
-                const SizedBox(height: 20),
+class MobileImage extends StatelessWidget {
+  const MobileImage({
+    super.key,
+    required this.isMobile,
+    required this.isTablet,
+  });
+
+  final bool isMobile;
+  final bool isTablet;
+
+  @override
+  Widget build(BuildContext context) {
+    final double phoneWidth = isMobile ? 150 : (isTablet ? 200 : 240);
+    final double phoneHeight = isMobile ? 280 : (isTablet ? 360 : 460);
+
+    return Expanded(
+      flex: isMobile ? 0 : 1,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: phoneHeight,
+            child: Stack(
+              alignment: Alignment.center,
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                      width: phoneWidth,
+                      height: phoneHeight,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(36),
+                        border: Border.all(color: Colors.white, width: 3),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.4),
+                            blurRadius: 30,
+                            offset: const Offset(0, 12),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(28),
+                        child: Container(
+                          color: const Color(0xFF222831), // شاشة غامقة
+                          child: Center(
+                            child: Icon(
+                              Icons.flutter_dash,
+                              size: isMobile ? 70 : (isTablet ? 100 : 130),
+                              color: const Color(0xFF00ADB5),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                    .animate(
+                      onPlay:
+                          (controller) => controller.repeat(period: 20.seconds),
+                    )
+                    .shake(
+                      duration: 2.seconds, // يهتز ثانيتين
+                      hz: 2,
+                      curve: Curves.easeInOut,
+                    )
+                    .then(delay: 60.seconds), // يفضل ثابت دقيقة
               ],
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );

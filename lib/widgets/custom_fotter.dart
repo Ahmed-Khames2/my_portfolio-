@@ -27,15 +27,18 @@ class Footer extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             IconButton(
-              onPressed: () => openUrl("https://github.com/your"),
+              onPressed: () => openUrl("https://github.com/Ahmed-Khames2"),
               icon: const Icon(Icons.code),
             ),
             IconButton(
-              onPressed: () => openUrl("https://linkedin.com/in/your"),
+              onPressed:
+                  () => openUrl(
+                    "https://www.linkedin.com/in/ahmed-khames-738070289?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+                  ),
               icon: const Icon(Icons.business_center),
             ),
             IconButton(
-              onPressed: () => openUrl("mailto:your@email.com"),
+              onPressed: () => openUrl("mailto:ahmedkham1234567@gmail.com"),
               icon: const Icon(Icons.mail_outline),
             ),
           ],
