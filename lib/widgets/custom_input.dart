@@ -26,7 +26,10 @@ class Input extends StatelessWidget {
         hintText: hint,
         filled: true,
         fillColor: const Color(0xFF1F2023),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.divider),
@@ -37,7 +40,10 @@ class Input extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.primary, width: 1.2),
+          borderSide: const BorderSide(
+            color: AppColors.lightPrimary,
+            width: 1.2,
+          ),
         ),
       ),
     );

@@ -14,7 +14,7 @@ class Footer extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
       width: double.infinity,
-      decoration: const BoxDecoration(color: AppColors.surface),
+      decoration: const BoxDecoration(color: AppColors.lightTextSecondary),
       child: Center(
         child: Wrap(
           alignment: WrapAlignment.center,

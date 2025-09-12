@@ -27,7 +27,7 @@ class SkillCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: isMobile ? 8 : 12),
       padding: EdgeInsets.all(isMobile ? 12 : 16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.lightTextSecondary,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(

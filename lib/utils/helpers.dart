@@ -39,11 +39,11 @@ class SectionTitle extends StatelessWidget {
               text,
               style: t.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: AppColors.lightBackground,
                 letterSpacing: 1.2,
                 shadows: [
                   Shadow(
-                    color: AppColors.primary.withOpacity(0.4),
+                    color: AppColors.lightPrimary.withOpacity(0.4),
                     blurRadius: 8,
                     offset: const Offset(2, 2),
                   ),
@@ -69,8 +69,8 @@ class SectionTitle extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.textPrimary.withOpacity(0.9),
-                      AppColors.textPrimary.withOpacity(0.1),
+                      AppColors.lightBackground.withOpacity(0.9),
+                      AppColors.lightBackground.withOpacity(0.1),
                     ],
                   ),
                 ),

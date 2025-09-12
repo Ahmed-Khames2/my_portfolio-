@@ -7,27 +7,27 @@ class AppTextStyles {
   static TextStyle headlineLarge = GoogleFonts.poppins(
     fontSize: 36,
     fontWeight: FontWeight.bold,
-    color: AppColors.textPrimary,
+    color: AppColors.lightBackground,
   );
 
   // للعناوين المتوسطة
   static TextStyle headlineMedium = GoogleFonts.poppins(
     fontSize: 24,
     fontWeight: FontWeight.w600,
-    color: AppColors.textPrimary,
+    color: AppColors.lightBackground,
   );
 
   // للنصوص العادية
   static TextStyle body = GoogleFonts.roboto(
     fontSize: 16,
     fontWeight: FontWeight.normal,
-    color: AppColors.textSecondary,
+    color: AppColors.lightTextSecondary,
   );
 
   // للـ Buttons
   static TextStyle button = GoogleFonts.poppins(
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: AppColors.textPrimary,
+    color: AppColors.lightBackground,
   );
 }

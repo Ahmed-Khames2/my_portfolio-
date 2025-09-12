@@ -109,7 +109,7 @@ class _ServiceCardState extends State<ServiceCard> {
                         ? (size.width < 600 ? 18 : 22)
                         : (size.width < 600 ? 16 : 20),
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: AppColors.lightBackground,
               ),
             ),
             const SizedBox(height: 12),
@@ -122,7 +122,7 @@ class _ServiceCardState extends State<ServiceCard> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: isActive ? 15 : 13,
-                    color: AppColors.textPrimary.withOpacity(0.9),
+                    color: AppColors.lightBackground.withOpacity(0.9),
                     height: 1.4,
                   ),
                 ),

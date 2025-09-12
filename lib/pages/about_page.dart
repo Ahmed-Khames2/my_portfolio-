@@ -157,7 +157,7 @@ class AboutSection extends StatelessWidget {
                 width: isMobile ? 300 : 380,
                 height: isMobile ? 300 : 380,
                 decoration: BoxDecoration(
-                  color: AppColors.textSecondary.withOpacity(0.3),
+                  color: AppColors.lightTextSecondary.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(24),
                 ),
               ),
@@ -169,7 +169,7 @@ class AboutSection extends StatelessWidget {
                     width: isMobile ? 300 : 380,
                     height: isMobile ? 300 : 380,
                     decoration: BoxDecoration(
-                      color: AppColors.surface,
+                      color: AppColors.lightTextSecondary,
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(

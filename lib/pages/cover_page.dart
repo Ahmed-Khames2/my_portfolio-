@@ -28,7 +28,10 @@ class CoverSection extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primary.withOpacity(.9), AppColors.background],
+          colors: [
+            AppColors.lightPrimary.withOpacity(.9),
+            AppColors.lightTextPrimary,
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -69,7 +72,7 @@ class CoverSection extends StatelessWidget {
                           fontFamily: fontFamily,
                           fontSize: isMobile ? 26 : (isTablet ? 34 : 42),
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                          color: AppColors.lightBackground,
                         ),
                         speed: const Duration(milliseconds: 120),
                         cursor: "|",
@@ -84,7 +87,7 @@ class CoverSection extends StatelessWidget {
                           fontFamily: fontFamily,
                           fontSize: isMobile ? 26 : (isTablet ? 34 : 42),
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                          color: AppColors.lightBackground,
                         ),
                         speed: const Duration(milliseconds: 120),
                         cursor: "|",
@@ -104,7 +107,7 @@ class CoverSection extends StatelessWidget {
                           style: t.headlineMedium?.copyWith(
                             fontFamily: fontFamily,
                             fontSize: isMobile ? 15 : 20,
-                            color: AppColors.textPrimary,
+                            color: AppColors.lightBackground,
                           ),
                         ),
                         TextSpan(
@@ -121,7 +124,7 @@ class CoverSection extends StatelessWidget {
                           style: t.headlineMedium?.copyWith(
                             fontFamily: fontFamily,
                             fontSize: isMobile ? 15 : 20,
-                            color: AppColors.textPrimary,
+                            color: AppColors.lightBackground,
                           ),
                         ),
                       ],
@@ -138,7 +141,7 @@ class CoverSection extends StatelessWidget {
                     style: t.bodyLarge?.copyWith(
                       fontFamily: fontFamily,
                       fontSize: isMobile ? 13 : 15,
-                      color: AppColors.textPrimary.withOpacity(.9),
+                      color: AppColors.lightBackground.withOpacity(.9),
                       height: 1.6,
                     ),
                   ).animate().fadeIn(duration: 600.ms),
@@ -167,7 +170,7 @@ class CoverSection extends StatelessWidget {
                               style: t.bodyMedium?.copyWith(
                                 fontFamily: fontFamily,
                                 fontSize: isMobile ? 13 : 15,
-                                color: AppColors.textPrimary,
+                                color: AppColors.lightBackground,
                               ),
                             ),
                           ),
@@ -192,7 +195,7 @@ class CoverSection extends StatelessWidget {
                               style: t.bodyMedium?.copyWith(
                                 fontFamily: fontFamily,
                                 fontSize: isMobile ? 13 : 15,
-                                color: AppColors.textPrimary,
+                                color: AppColors.lightBackground,
                               ),
                             ),
                           ),
@@ -226,12 +229,12 @@ class CoverSection extends StatelessWidget {
                             horizontal: isMobile ? 20 : 28,
                             vertical: isMobile ? 12 : 16,
                           ),
-                          backgroundColor: AppColors.primary,
+                          backgroundColor: AppColors.lightPrimary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 8,
-                          shadowColor: AppColors.primary.withOpacity(.5),
+                          shadowColor: AppColors.lightPrimary.withOpacity(.5),
                         ),
                       )
                       .animate()

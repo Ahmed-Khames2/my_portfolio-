@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
 
@@ -13,14 +11,11 @@ class Badge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.lightTextSecondary,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(color: AppColors.divider),
       ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.bodyMedium,
-      ),
+      child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
     );
   }
 }

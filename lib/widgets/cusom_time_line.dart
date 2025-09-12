@@ -39,14 +39,14 @@ class _EducationCardAnimatedState extends State<EducationCardAnimated> {
                   ..scale(1.03))
                 : Matrix4.identity(),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColors.lightTextSecondary,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1.5),
           boxShadow: [
             BoxShadow(
               color:
                   _hovering
-                      ? AppColors.primary.withOpacity(0.4)
+                      ? AppColors.lightPrimary.withOpacity(0.4)
                       : Colors.black12,
               blurRadius: _hovering ? 20 : 10,
               spreadRadius: _hovering ? 2 : 0,

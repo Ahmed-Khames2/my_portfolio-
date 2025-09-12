@@ -24,7 +24,7 @@ class ExperienceSection extends StatelessWidget {
               vertical: isMobile ? 12 : 20,
             ),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: AppColors.lightTextSecondary,
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: AppColors.divider),
               boxShadow: [
@@ -73,7 +73,7 @@ class ExperienceSection extends StatelessWidget {
                 Divider(color: AppColors.divider),
                 const SizedBox(height: 12),
                 ExperienceRow(
-                  accentColor: AppColors.primary,
+                  accentColor: AppColors.lightPrimary,
                   imagePath: 'assets/images/cp.png',
                   title: "os_title".tr(context),
                   period: "os_period".tr(context),
@@ -94,7 +94,6 @@ class ExperienceSection extends StatelessWidget {
     );
   }
 }
-
 
 class ExperienceRow extends StatelessWidget {
   final Color accentColor;
@@ -147,7 +146,7 @@ class ExperienceRow extends StatelessWidget {
             Text(
               period,
               style: textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: AppColors.lightTextSecondary,
                 fontSize: 11,
               ),
             ),
@@ -172,7 +171,8 @@ class ExperienceRow extends StatelessWidget {
                             t,
                             style: textTheme.bodySmall?.copyWith(fontSize: 11),
                           ),
-                          backgroundColor: AppColors.surface.withOpacity(0.9),
+                          backgroundColor: AppColors.lightTextSecondary
+                              .withOpacity(0.9),
                           side: BorderSide(
                             color: AppColors.divider.withOpacity(0.6),
                           ),
@@ -244,7 +244,7 @@ class ExperienceRow extends StatelessWidget {
                           Text(
                             period,
                             style: textTheme.bodySmall?.copyWith(
-                              color: AppColors.textSecondary,
+                              color: AppColors.lightTextSecondary,
                               fontSize: 12,
                             ),
                           ),
@@ -272,7 +272,8 @@ class ExperienceRow extends StatelessWidget {
                                       vertical: 6,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: AppColors.surface.withOpacity(0.8),
+                                      color: AppColors.lightTextSecondary
+                                          .withOpacity(0.8),
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
                                         color: AppColors.divider.withOpacity(
@@ -284,7 +285,7 @@ class ExperienceRow extends StatelessWidget {
                                       t,
                                       style: textTheme.bodySmall?.copyWith(
                                         fontSize: 12,
-                                        color: AppColors.textPrimary,
+                                        color: AppColors.lightBackground,
                                       ),
                                     ),
                                   ),

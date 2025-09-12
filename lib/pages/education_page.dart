@@ -28,7 +28,7 @@ class EducationSection extends StatelessWidget {
               vertical: isMobile ? 12 : 16,
             ),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: AppColors.lightTextSecondary,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: AppColors.divider),
               boxShadow: [
@@ -128,7 +128,10 @@ class EducationRow extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [AppColors.primary, AppColors.primary.withOpacity(.65)],
+                colors: [
+                  AppColors.lightPrimary,
+                  AppColors.lightPrimary.withOpacity(.65),
+                ],
               ),
             ),
           ),
@@ -185,7 +188,7 @@ class EducationRow extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondary,
+                      color: AppColors.lightTextSecondary,
                       fontSize: isMobile ? 12.5 : 14,
                     ),
                   ),
@@ -193,7 +196,7 @@ class EducationRow extends StatelessWidget {
                   Text(
                     details,
                     style: textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary.withOpacity(.9),
+                      color: AppColors.lightTextSecondary.withOpacity(.9),
                       height: 1.35,
                       fontSize: isMobile ? 12 : 13,
                     ),

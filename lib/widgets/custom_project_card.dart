@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/models/project_data.dart';
@@ -36,7 +35,7 @@ class _ProjectCardState extends State<ProjectCard> {
         curve: Curves.easeOut,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: AppColors.surface,
+          color: AppColors.lightTextSecondary,
           boxShadow: [
             BoxShadow(
               color:

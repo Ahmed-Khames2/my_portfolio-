@@ -57,20 +57,23 @@ class _FormContactState extends State<FormContact> {
   void _showDialog(String title, String message) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: Text(title),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              FocusScope.of(context).unfocus();
-            },
-            child: Text("ok".tr(context)),
+      builder:
+          (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            title: Text(title),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
+                },
+                child: Text("ok".tr(context)),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -83,7 +86,7 @@ class _FormContactState extends State<FormContact> {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: AppColors.lightTextSecondary,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: AppColors.divider),
           ),
@@ -92,10 +95,11 @@ class _FormContactState extends State<FormContact> {
               Input(
                 hint: "your_name".tr(context),
                 controller: nameController,
-                validator: (value) =>
-                    value == null || value.isEmpty
-                        ? "validate_name".tr(context)
-                        : null,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? "validate_name".tr(context)
+                            : null,
               ),
               const SizedBox(height: 10),
               Input(
@@ -105,8 +109,9 @@ class _FormContactState extends State<FormContact> {
                   if (value == null || value.isEmpty) {
                     return "validate_email".tr(context);
                   }
-                  if (!RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w]{2,4}")
-                      .hasMatch(value)) {
+                  if (!RegExp(
+                    r"^[\w-\.]+@([\w-]+\.)+[\w]{2,4}",
+                  ).hasMatch(value)) {
                     return "validate_email_format".tr(context);
                   }
                   return null;
@@ -117,20 +122,22 @@ class _FormContactState extends State<FormContact> {
                 hint: "your_message".tr(context),
                 maxLines: 5,
                 controller: messageController,
-                validator: (value) =>
-                    value == null || value.isEmpty
-                        ? "validate_message".tr(context)
-                        : null,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? "validate_message".tr(context)
+                            : null,
               ),
               const SizedBox(height: 12),
               Align(
                 alignment: Alignment.centerRight,
-                child: _isLoading
-                    ? const CircularProgressIndicator()
-                    : ElevatedButton(
-                        onPressed: sendMessage,
-                        child: Text("send_message".tr(context)),
-                      ),
+                child:
+                    _isLoading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                          onPressed: sendMessage,
+                          child: Text("send_message".tr(context)),
+                        ),
               ),
             ],
           ),

@@ -10,14 +10,18 @@ class TestimonialCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.lightTextSecondary,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.divider),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.format_quote, size: 28, color: AppColors.secondary),
+          const Icon(
+            Icons.format_quote,
+            size: 28,
+            color: AppColors.lightSecondary,
+          ),
           const SizedBox(height: 8),
           Text(quote, style: t.bodyLarge),
           const SizedBox(height: 10),
