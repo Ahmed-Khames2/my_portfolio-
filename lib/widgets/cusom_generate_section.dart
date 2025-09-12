@@ -1,66 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class Section extends StatefulWidget {
-  final Widget child;
-  final double maxWidth;
-  final double padTop;
-  final double padBottom;
-
-  const Section({
-    super.key,
-    required this.child,
-    this.maxWidth = 1100,
-    this.padTop = 56,
-    this.padBottom = 56,
-  });
-
-  @override
-  State<Section> createState() => _SectionState();
-}
-
-class _SectionState extends State<Section> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 60),
-    )..repeat();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final content = Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: widget.maxWidth),
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: widget.padTop,
-            bottom: widget.padBottom,
-          ),
-          child: widget.child,
-        ),
-      ),
-    );
-
-    return Stack(
-      children: [
-        Positioned.fill(child: CodingBackground(controller: _controller)),
-        content,
-      ],
-    );
-  }
-}
-
 class CodingBackground extends StatefulWidget {
   final AnimationController controller;
   const CodingBackground({super.key, required this.controller});
@@ -75,10 +15,12 @@ class _CodingBackgroundState extends State<CodingBackground> {
   late List<_CodingSymbol> symbols;
 
   final List<String> symbolsList = [
-    "{ }",
-    "< />",
-    "();",
-    "=>",
+    // "{ }",
+    // "< />",
+    // "();",
+    // "=>",
+    "1000001",
+    "1001011",
     "Flutter",
     "Dart",
     "var",
@@ -90,6 +32,11 @@ class _CodingBackgroundState extends State<CodingBackground> {
     Icons.flutter_dash,
     Icons.code,
     Icons.computer,
+    Icons.code_off,
+    Icons.flutter_dash,
+    Icons.code,
+    Icons.computer,
+    Icons.code_off,
   ];
 
   @override
@@ -99,7 +46,9 @@ class _CodingBackgroundState extends State<CodingBackground> {
     symbols = List.generate(symbolCount, (index) {
       final isIcon = _rnd.nextBool();
       final angle = _rnd.nextDouble() * 2 * pi;
-      final speed = 0.0005 + _rnd.nextDouble() * 0.0015;
+
+      // 👇 هنا قللت السرعة علشان الحركة تبقى أبطأ
+      final speed = 0.0001 + _rnd.nextDouble() * 0.0003;
 
       return _CodingSymbol(
         text: isIcon ? null : symbolsList[_rnd.nextInt(symbolsList.length)],

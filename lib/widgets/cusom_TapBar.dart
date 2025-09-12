@@ -63,26 +63,6 @@ class _TopBarState extends State<TopBar> {
       ),
       actions: [
         if (isMobile) ...[
-          // ✅ أول حاجة: أيقونة المينيو
-          PopupMenuButton<String>(
-            onSelected: widget.onNav,
-            itemBuilder:
-                (c) =>
-                    items
-                        .map(
-                          (e) => PopupMenuItem<String>(
-                            value: e,
-                            child: Text(
-                              e.tr(context), // ✅ ترجمة من JSON
-                              style: TextStyle(color: AppColors.textPrimary),
-                            ),
-                          ),
-                        )
-                        .toList(),
-            icon: Icon(Icons.menu, color: AppColors.textPrimary),
-          ),
-          const SizedBox(width: 8),
-
           // ✅ بعد كدا: أيقونة اللغة
           BlocBuilder<LocaleCubit, LocaleState>(
             builder: (context, state) {
@@ -100,6 +80,26 @@ class _TopBarState extends State<TopBar> {
               }
               return const SizedBox();
             },
+          ),
+          const SizedBox(width: 8),
+
+          // ✅ أول حاجة: أيقونة المينيو
+          PopupMenuButton<String>(
+            onSelected: widget.onNav,
+            itemBuilder:
+                (c) =>
+                    items
+                        .map(
+                          (e) => PopupMenuItem<String>(
+                            value: e,
+                            child: Text(
+                              e.tr(context), // ✅ ترجمة من JSON
+                              style: TextStyle(color: AppColors.textPrimary),
+                            ),
+                          ),
+                        )
+                        .toList(),
+            icon: Icon(Icons.menu, color: AppColors.textPrimary),
           ),
           const SizedBox(width: 8),
         ] else ...[

@@ -14,6 +14,7 @@ import 'package:my_portfolio2/utils/seperator.dart';
 import 'package:my_portfolio2/widgets/cusom_TapBar.dart';
 import 'package:my_portfolio2/widgets/cusom_generate_section.dart';
 import 'package:my_portfolio2/widgets/custom_fotter.dart';
+import 'package:my_portfolio2/widgets/section_widget.dart';
 
 class PortfolioOnePage extends StatefulWidget {
   const PortfolioOnePage({super.key});

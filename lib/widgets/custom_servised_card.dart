@@ -13,7 +13,7 @@ class ServiceCard extends StatefulWidget {
     required this.desc,
     required this.icon,
     this.isCenter = false,
-    this.iconColor = AppColors.primary,
+    required this.iconColor,
   });
 
   @override
@@ -25,80 +25,105 @@ class _ServiceCardState extends State<ServiceCard> {
 
   @override
   Widget build(BuildContext context) {
-    final t = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
+    final isActive = widget.isCenter || _hovered;
 
-    final bool isActive = widget.isCenter || _hovered;
+    double cardWidth =
+        size.width < 600
+            ? size.width * 0.85
+            : size.width < 1200
+            ? size.width * 0.45
+            : 380;
 
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
+        width: cardWidth,
+        constraints: const BoxConstraints(minHeight: 260, maxHeight: 380),
         padding: const EdgeInsets.all(20),
-        width: double.infinity,
-        constraints: const BoxConstraints(
-          minHeight: 220, // 👈 أقل ارتفاع ثابت
-          maxHeight: 300, // 👈 أقصى ارتفاع عشان مايزودش overflow
-        ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: isActive
-              ? widget.iconColor.withOpacity(0.15)
-              : Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors:
+                isActive
+                    ? [
+                      widget.iconColor.withOpacity(0.3),
+                      widget.iconColor.withOpacity(0.1),
+                    ]
+                    : [Colors.grey.shade50, Colors.grey.shade100],
+          ),
           boxShadow: [
             BoxShadow(
-              color: isActive
-                  ? widget.iconColor.withOpacity(0.3)
-                  : Colors.black12,
-              blurRadius: isActive ? 25 : 10,
-              offset: const Offset(0, 8),
+              color: Colors.black26,
+              blurRadius: isActive ? 30 : 15,
+              offset: Offset(0, isActive ? 15 : 8),
+            ),
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: isActive ? 20 : 8,
+              offset: const Offset(0, 6),
             ),
           ],
-          gradient: !isActive
-              ? LinearGradient(
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // أيقونة الكارد مع تأثير Glow
+            Container(
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
                   colors: [
-                    AppColors.primary.withOpacity(0.05),
-                    AppColors.primary.withOpacity(0.1),
+                    widget.iconColor.withOpacity(0.6),
+                    widget.iconColor.withOpacity(0.2),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                )
-              : null,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: widget.iconColor.withOpacity(0.2),
-                shape: BoxShape.circle,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: widget.iconColor.withOpacity(0.4),
+                    blurRadius: 12,
+                    spreadRadius: 1,
+                  ),
+                ],
               ),
-              child: Icon(widget.icon, color: widget.iconColor, size: 48),
+              child: Icon(widget.icon, color: Colors.white, size: 52),
             ),
-            const SizedBox(height: 16),
+            // const SizedBox(height: 18),
+            Spacer(),
+            // العنوان
             Text(
               widget.title,
               textAlign: TextAlign.center,
-              style: t.titleLarge?.copyWith(
+              style: TextStyle(
+                fontSize:
+                    isActive
+                        ? (size.width < 600 ? 18 : 22)
+                        : (size.width < 600 ? 16 : 20),
                 fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
-                fontSize: size.width < 600 ? 16 : 18,
               ),
             ),
-            const SizedBox(height: 10),
-            // 👇 النص جوا Scroll صغير عشان لو طويل ميفرش الكارت
-            Expanded(
+            const SizedBox(height: 12),
+            // الوصف Scrollable
+            SizedBox(
+              height: isActive ? 120 : 100,
               child: SingleChildScrollView(
                 child: Text(
                   widget.desc,
                   textAlign: TextAlign.center,
-                  style: t.bodyMedium?.copyWith(
-                    height: 1.4,
+                  style: TextStyle(
+                    fontSize: isActive ? 15 : 13,
                     color: AppColors.textPrimary.withOpacity(0.9),
-                    fontSize: size.width < 600 ? 12 : 14,
+                    height: 1.4,
                   ),
                 ),
               ),

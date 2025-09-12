@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
 import 'package:my_portfolio2/widgets/custom_servised_card.dart';
@@ -30,57 +30,76 @@ class _ServicesSectionState extends State<ServicesSection> {
       Icons.smart_toy,
       Colors.red,
     ),
-    // (
-    //   "placeholder_service".tr,
-    //   "placeholder_desc".tr,
-    //   Icons.build,
-    //   Colors.teal
-    // ),
   ];
+
+  void nextService() =>
+      setState(() => _current = (_current + 1) % services.length);
+  void prevService() => setState(
+    () => _current = (_current - 1 + services.length) % services.length,
+  );
 
   @override
   Widget build(BuildContext context) {
+    final s = services[_current];
+    final size = MediaQuery.of(context).size;
+
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SectionTitle("our_services".tr(context)),
-          const SizedBox(height: 24),
-      
-          CarouselSlider.builder(
-            itemCount: services.length,
-            options: CarouselOptions(
-              height: 340,
-              enlargeCenterPage: true,
-              viewportFraction: 0.33,
-              enableInfiniteScroll: true,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _current = index;
-                });
-              },
-            ),
-            itemBuilder: (ctx, i, realIdx) {
-              final s = services[i];
-              final isCenter = i == _current;
-      
-              return AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
-                transform:
-                    isCenter
-                        ? (Matrix4.identity()..scale(1.08))
-                        : Matrix4.identity(),
-                child: ServiceCard(
-                  title: s.$1(context),
-                  desc: s.$2(context),
-                  icon: s.$3,
-                  isCenter: isCenter,
-                  iconColor: s.$4,
+          const SizedBox(height: 30),
+
+          SizedBox(
+            height: size.width < 600 ? 400 : 380,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width:
+                      size.width < 600 ? size.width * 0.85 : size.width * 0.45,
+                  child: ServiceCard(
+                    title: s.$1(context),
+                    desc: s.$2(context),
+                    icon: s.$3,
+                    isCenter: true,
+                    iconColor: s.$4,
+                  ),
                 ),
-              );
-            },
+                Positioned(
+                  left: 0,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back_ios, size: 28, color: s.$4),
+                    onPressed: prevService,
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_forward_ios, size: 28, color: s.$4),
+                    onPressed: nextService,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              services.length,
+              (i) => AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                width: _current == i ? 14 : 10,
+                height: _current == i ? 14 : 10,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _current == i ? s.$4 : Colors.grey.shade400,
+                ),
+              ),
+            ),
           ),
         ],
       ),
