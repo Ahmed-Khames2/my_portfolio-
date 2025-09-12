@@ -36,7 +36,7 @@ class PortfolioDemoApp extends StatelessWidget {
               }
               return supportedLocales.first;
             },
-            title: 'Portfolio Demo',
+            title: 'Ahmed Khames Porfolio',
             debugShowCheckedModeBanner: false,
             theme: AppTheme.darkTheme,
             home: const PortfolioOnePage(),

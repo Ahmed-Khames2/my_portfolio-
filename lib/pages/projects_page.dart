@@ -68,20 +68,22 @@ ${"ecom_desc".tr(context)}
           "assets/images/todo10.jpg",
         ],
         imagesBackGround: 'assets/images/productivity (5).png',
-    fullDesc: "todo_full_desc".tr(context),
+        fullDesc: "todo_full_desc".tr(context),
       ),
     ];
 
     final headerColors = [
       Colors.tealAccent.shade700,
       Colors.grey,
-Color(0xFF4CAF50),    
-  Colors.blueAccent,
+      Color(0xFF4CAF50),
+      Colors.blueAccent,
       Colors.greenAccent.shade400,
     ];
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(
+        MediaQuery.of(context).size.width < 750 ? 16.0 : 0,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
