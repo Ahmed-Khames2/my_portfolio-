@@ -171,6 +171,22 @@
   "ecom_title": "E-Commerce App",
   "ecom_desc": "A simple e-commerce application with Firebase authentication.",
   "todo_title": "ToDo App",
-  "todo_desc": "Description coming soon"
+  "todo_desc": "Description coming soon",
+    "todo_full_desc": "Todo App: features include searching tasks by name, filtering by category, adding/editing/deleting tasks, marking tasks complete, and persistent local storage using SQLite. The app supports both dark and light modes and is fully responsive across mobile devices.",
+
+
+    "your_name": "Your Name",
+  "your_email": "Your Email",
+  "your_message": "Your Message",
+  "send_message": "Send Message",
+  "success_title": "✅ Message Sent",
+  "success_msg": "Your message has been sent successfully!",
+  "error_title": "⚠️ Error",
+  "error_msg": "Something went wrong.",
+  "ok": "OK",
+  "validate_name": "Please enter your name",
+  "validate_email": "Please enter your email",
+  "validate_email_format": "Enter a valid email",
+  "validate_message": "Please enter your message"
 
 }

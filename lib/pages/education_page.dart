@@ -11,90 +11,86 @@ class EducationSection extends StatelessWidget {
     final isMobile = MediaQuery.of(context).size.width < 700;
     final t = Theme.of(context).textTheme;
 
-    return Padding(
+    return SingleChildScrollView(
+      // ✅ يخلي المحتوى كله يلف Scroll
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-      SectionTitle('education_title'.tr(context)),
-      const SizedBox(height: 16),
-      
-      // 🧱 الحاوية العامة لكل التعليم
-      Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-          horizontal: isMobile ? 12 : 20,
-          vertical: isMobile ? 12 : 16,
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.divider),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 14,
-              offset: const Offset(0, 6),
+          SectionTitle('education_title'.tr(context)),
+          const SizedBox(height: 16),
+
+          // 🧱 الحاوية العامة لكل التعليم
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 12 : 20,
+              vertical: isMobile ? 12 : 16,
             ),
-          ],
-        ),
-        child: Column(
-          children: [
-            // 🎓 جامعة أسيوط
-            EducationRow(
-              icon: 'assets/images/assiut.png',
-              title: "education_assiut_title".tr(context),
-              subtitle: "education_assiut_subtitle".tr(context),
-              details: "education_assiut_details".tr(context),
-              isMobile: isMobile,
-              textTheme: t,
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.divider),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.04),
+                  blurRadius: 14,
+                  offset: const Offset(0, 6),
+                ),
+              ],
             ),
-            const SizedBox(height: 14),
-            Divider(color: AppColors.divider, height: 1),
-            const SizedBox(height: 14),
-      
-            // 🎓 جامعة كفر الشيخ
-            EducationRow(
-              icon: 'assets/images/kafr.png',
-              title: "education_kafr_title".tr(context),
-              subtitle: "education_kafr_subtitle".tr(context),
-              details: "education_kafr_details".tr(context),
-              isMobile: isMobile,
-              textTheme: t,
+            child: Column(
+              children: [
+                EducationRow(
+                  icon: 'assets/images/assiut.png',
+                  title: "education_assiut_title".tr(context),
+                  subtitle: "education_assiut_subtitle".tr(context),
+                  details: "education_assiut_details".tr(context),
+                  isMobile: isMobile,
+                  textTheme: t,
+                ),
+                const SizedBox(height: 14),
+                Divider(color: AppColors.divider, height: 1),
+                const SizedBox(height: 14),
+
+                EducationRow(
+                  icon: 'assets/images/kafr.png',
+                  title: "education_kafr_title".tr(context),
+                  subtitle: "education_kafr_subtitle".tr(context),
+                  details: "education_kafr_details".tr(context),
+                  isMobile: isMobile,
+                  textTheme: t,
+                ),
+                const SizedBox(height: 14),
+                Divider(color: AppColors.divider, height: 1),
+                const SizedBox(height: 14),
+
+                EducationRow(
+                  icon: 'assets/images/DEPI.jpg',
+                  title: "education_depi_title".tr(context),
+                  subtitle: "education_depi_subtitle".tr(context),
+                  details: "education_depi_details".tr(context),
+                  isMobile: isMobile,
+                  textTheme: t,
+                ),
+                const SizedBox(height: 14),
+                Divider(color: AppColors.divider, height: 1),
+                const SizedBox(height: 14),
+
+                EducationRow(
+                  icon: 'assets/images/ud.png',
+                  title: "education_udemy_title".tr(context),
+                  subtitle: "education_udemy_subtitle".tr(context),
+                  details: "education_udemy_details".tr(context),
+                  isMobile: isMobile,
+                  textTheme: t,
+                ),
+              ],
             ),
-            const SizedBox(height: 14),
-            Divider(color: AppColors.divider, height: 1),
-            const SizedBox(height: 14),
-      
-            // 🚀 مبادرة رواد مصر الرقمية
-            EducationRow(
-              icon: 'assets/images/DEPI.jpg',
-              title: "education_depi_title".tr(context),
-              subtitle: "education_depi_subtitle".tr(context),
-              details: "education_depi_details".tr(context),
-              isMobile: isMobile,
-              textTheme: t,
-            ),
-            const SizedBox(height: 14),
-            Divider(color: AppColors.divider, height: 1),
-            const SizedBox(height: 14),
-      
-            // 🎓 كورس Udemy
-            EducationRow(
-              icon: 'assets/images/ud.png',
-              title: "education_udemy_title".tr(context),
-              subtitle: "education_udemy_subtitle".tr(context),
-              details: "education_udemy_details".tr(context),
-              isMobile: isMobile,
-              textTheme: t,
-            ),
-          ],
-        ),
-      ),
+          ),
         ],
       ),
     );
-
   }
 }
 
@@ -142,7 +138,7 @@ class EducationRow extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: SizedBox(
-              width: isMobile ? 56 : 84,
+              width: isMobile ? 60 : 84,
               child: Stack(
                 fit: StackFit.expand,
                 children: [

@@ -1,87 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class AchievementsSection extends StatelessWidget {
-//   const AchievementsSection({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final t = Theme.of(context).textTheme;
-
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text("Achievements", style: t.headlineSmall),
-//         const SizedBox(height: 16),
-
-//         Card(
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(12),
-//           ),
-//           elevation: 4,
-//           margin: const EdgeInsets.symmetric(vertical: 8),
-//           child: ListTile(
-//             leading: const Icon(Icons.school, color: Colors.blue, size: 32),
-//             title: const Text("Udemy Certificate – Dart"),
-//             subtitle: const Text(
-//               "Completed a course and earned a certificate in Dart programming.",
-//             ),
-//           ),
-//         ),
-
-//         Card(
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(12),
-//           ),
-//           elevation: 4,
-//           margin: const EdgeInsets.symmetric(vertical: 8),
-//           child: ListTile(
-//             leading: const Icon(Icons.school, color: Colors.orange, size: 32),
-//             title: const Text("Udemy Certificate – Flutter"),
-//             subtitle: const Text(
-//               "Completed a course and earned a certificate in Flutter development.",
-//             ),
-//           ),
-//         ),
-
-//         Card(
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(12),
-//           ),
-//           elevation: 4,
-//           margin: const EdgeInsets.symmetric(vertical: 8),
-//           child: ListTile(
-//             leading: const Icon(
-//               Icons.phone_android,
-//               color: Colors.green,
-//               size: 32,
-//             ),
-//             title: const Text("First App: ALQuds"),
-//             subtitle: const Text(
-//               "Developed my first Islamic app with Prayer Times, Quran offline, Azkar, and more.",
-//             ),
-//           ),
-//         ),
-
-//         Card(
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(12),
-//           ),
-//           elevation: 4,
-//           margin: const EdgeInsets.symmetric(vertical: 8),
-//           child: ListTile(
-//             leading: const Icon(Icons.groups, color: Colors.purple, size: 32),
-//             title: const Text(
-//               "Volunteer Project – University (Quality Management)",
-//             ),
-//             subtitle: const Text(
-//               "Contributed in a university volunteer team building a Quality Management app.",
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
@@ -169,19 +85,25 @@ class AchievementsSection extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       const SizedBox(height: 12),
-                                      InteractiveViewer(
-                                        panEnabled: false,
-                                        minScale: 1,
-                                        maxScale: 1,
-                                        child: SizedBox(
-                                          width: 600,
-                                          height: 400,
-                                          child: Image.asset(
-                                            item["image"],
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
+                                    InteractiveViewer(
+  panEnabled: false,
+  minScale: 1,
+  maxScale: 3, // تقدر تكبر/تصغر الصورة لو حبيت
+  child: LayoutBuilder(
+    builder: (context, constraints) {
+      final screenWidth = MediaQuery.of(context).size.width;
+      final screenHeight = MediaQuery.of(context).size.height;
+
+      return Image.asset(
+        item["image"],
+        fit: BoxFit.contain, // يخليها كاملة بدون ما تتاكل
+        width: screenWidth * 0.9, // تاخد 90% من عرض الشاشة
+        height: screenHeight * 0.6, // 60% من ارتفاع الشاشة
+      );
+    },
+  ),
+),
+
                                       const SizedBox(height: 12),
                                       ElevatedButton(
                                         onPressed: () => Navigator.pop(context),

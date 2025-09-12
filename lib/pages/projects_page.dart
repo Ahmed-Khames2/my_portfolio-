@@ -176,18 +176,29 @@ ${"ecom_desc".tr(context)}
       ProjectModel(
         title: "todo_title".tr(context),
         description: "todo_desc".tr(context),
-        downloadUrl: "",
-        images: ["p3-1.png", "p3-2.png"],
-        imagesBackGround: 'assets/images/alquds.png',
-        fullDesc: '',
+        downloadUrl: "https://github.com/Ahmed-Khames2/todo_app",
+        images: [
+          "assets/images/todo1.jpg",
+          "assets/images/todo2.jpg",
+          "assets/images/todo3.jpg",
+          "assets/images/todo4.jpg",
+          "assets/images/todo5.jpg",
+          "assets/images/todo6.jpg",
+          "assets/images/todo7.jpg",
+          "assets/images/todo8.jpg",
+          "assets/images/todo9.jpg",
+          "assets/images/todo10.jpg",
+        ],
+        imagesBackGround: 'assets/images/productivity (5).png',
+    fullDesc: "todo_full_desc".tr(context),
       ),
     ];
 
     final headerColors = [
       Colors.tealAccent.shade700,
       Colors.grey,
-      Colors.orangeAccent,
-      Colors.blueAccent,
+Color(0xFF4CAF50),    
+  Colors.blueAccent,
       Colors.greenAccent.shade400,
     ];
 
