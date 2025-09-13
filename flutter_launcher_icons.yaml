@@ -1,0 +1,7 @@
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/portofolio.png"
+  adaptive_icon_background: "#F5F5F5"   # نفس لون الـ primary بتاعك
+  adaptive_icon_foreground: "assets/images/portofolio.png"
+# flutter pub run flutter_launcher_icons

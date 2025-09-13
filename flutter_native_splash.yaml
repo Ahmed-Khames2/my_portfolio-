@@ -1,0 +1,19 @@
+flutter_native_splash:
+  # Light mode
+  color: "#F5F5F5"               # نفس اللون للـ light
+  image: "assets/images/portofolio (1).png"
+
+  # Dark mode
+  color_dark: "#F5F5F5"          # نفس اللون للـ dark
+  image_dark: "assets/images/portofolio (1).png"
+
+  # Platforms
+  android: true
+  ios: true
+
+  # Make full-screen
+  fullscreen: true
+
+  # Positioning
+  android_gravity: center
+  ios_content_mode: center

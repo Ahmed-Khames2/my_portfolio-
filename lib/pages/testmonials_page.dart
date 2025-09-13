@@ -1,7 +1,6 @@
 
 /* ========================= TESTIMONIALS ========================= */
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/utils/helpers.dart';
 import 'package:my_portfolio2/widgets/SectionTitle.dart';
 import 'package:my_portfolio2/widgets/custom_testmo_card.dart';
 

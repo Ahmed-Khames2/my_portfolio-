@@ -27,6 +27,7 @@ class _ProjectCardState extends State<ProjectCard> {
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     final theme = Theme.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -168,15 +169,13 @@ class _ProjectCardState extends State<ProjectCard> {
                           _buildButton(
                             icon: Icons.code,
                             label: "GitHub",
-                            color:
-                                theme.brightness == Brightness.dark
-                                    ? Colors.white54
-                                    : Colors.black87,
+                            color: widget.headerColor, // 👈 نفس لون الـ Demo
                             onTap: () {
                               if (widget.project.downloadUrl.isNotEmpty) {
                                 openUrl(widget.project.downloadUrl);
                               }
                             },
+                            outlined: true, // 👈 Outlined
                           ),
                           _buildButton(
                             icon: Icons.open_in_browser,
@@ -212,10 +211,29 @@ class _ProjectCardState extends State<ProjectCard> {
     required String label,
     required Color color,
     required VoidCallback onTap,
+    bool outlined = false, // 👈 اختيار جديد
   }) {
+    if (outlined) {
+      return OutlinedButton.icon(
+        onPressed: onTap,
+        icon: Icon(icon, size: 18, color: color),
+        label: Text(
+          label,
+          style: TextStyle(color: color, fontWeight: FontWeight.bold),
+        ),
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: color, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
+    }
+
     return ElevatedButton.icon(
       onPressed: onTap,
-      icon: Icon(icon, size: 18, color: Colors.white),
+      icon: const Icon(Icons.open_in_browser, size: 18, color: Colors.white),
       label: Text(label, style: const TextStyle(color: Colors.white)),
       style: ElevatedButton.styleFrom(
         backgroundColor: color,

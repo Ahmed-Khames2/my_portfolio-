@@ -12,6 +12,7 @@ class ProjectDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
+    // ignore: unused_local_variable
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(

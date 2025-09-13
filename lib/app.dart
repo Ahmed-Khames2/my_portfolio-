@@ -5,6 +5,7 @@ import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/core/cubit/locale_cubit.dart';
 import 'package:my_portfolio2/core/theme/app_theme.dart';
 import 'package:my_portfolio2/core/theme/bloc/theme_bloc.dart';
+import 'package:my_portfolio2/pages/FlutterSplashPage.dart';
 import 'package:my_portfolio2/pages/portfolio_page.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';

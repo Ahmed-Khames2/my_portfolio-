@@ -45,7 +45,7 @@ class _FormContactState extends State<FormContact> {
       _showDialog("success_title".tr(context), "success_msg".tr(context));
     } catch (e) {
       _showDialog("error_title".tr(context), "${"error_msg".tr(context)}\n$e");
-      print(e);
+      // print(e);
     } finally {
       setState(() => _isLoading = false);
     }

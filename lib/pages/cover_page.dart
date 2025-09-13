@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/utils/helpers.dart';
 import 'package:my_portfolio2/widgets/AnimatedTextKit.dart';
 import 'package:my_portfolio2/widgets/CTA_Buttons.dart';
 import 'package:my_portfolio2/widgets/LocationAndStatus.dart';

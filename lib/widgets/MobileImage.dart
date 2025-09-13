@@ -69,7 +69,7 @@ class MobileImage extends StatelessWidget {
                         width: 60,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: colorScheme.onBackground,
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),

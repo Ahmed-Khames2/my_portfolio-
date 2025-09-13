@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/widgets/custom_fotter.dart';
 import 'package:pdfx/pdfx.dart';
 
 class PdfViewerPage extends StatefulWidget {
