@@ -136,9 +136,15 @@ class ExperienceRow extends StatelessWidget {
         ? Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(imagePath, height: 120, fit: BoxFit.cover),
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox(
+                  width: 120, // عرض ثابت
+                  height: 120, // ارتفاع ثابت
+                  child: Image.asset(imagePath, fit: BoxFit.cover),
+                ),
+              ),
             ),
             const SizedBox(height: 10),
             Text(

@@ -26,7 +26,7 @@ class FastScrollPhysics extends ScrollPhysics {
 
   @override
   double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
-    return offset * 2.5; // زيادة السرعة حسب الحاجة
+    return offset * 2; // زيادة السرعة حسب الحاجة
   }
 }
 

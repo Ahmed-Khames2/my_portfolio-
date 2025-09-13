@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
@@ -23,17 +22,11 @@ class CTA_Buttons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment:
-          isMobile
-              ? MainAxisAlignment.center
-              : MainAxisAlignment.start,
+          isMobile ? MainAxisAlignment.center : MainAxisAlignment.start,
       children: [
         ElevatedButton.icon(
               onPressed: () => goTo(contactKey),
-              icon: const Icon(
-                Icons.mail,
-                color: Colors.white,
-                size: 18,
-              ),
+              icon: const Icon(Icons.mail, color: Colors.white, size: 18),
               label: Text(
                 locale == "ar" ? "تواصل معي" : "Contact Me",
                 style: TextStyle(
@@ -62,9 +55,8 @@ class CTA_Buttons extends StatelessWidget {
             .shakeX(duration: 1200.ms, hz: 3, amount: 3),
         const SizedBox(width: 12),
         OutlinedButton.icon(
-          onPressed: () {
-            // TODO: Download CV
-          },
+          onPressed: () => goTo(contactKey),
+
           icon: const Icon(
             Icons.download,
             size: 18,
