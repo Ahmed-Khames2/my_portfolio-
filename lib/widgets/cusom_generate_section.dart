@@ -34,9 +34,6 @@ class _CodingBackgroundState extends State<CodingBackground> {
     Icons.computer,
     Icons.code_off,
     Icons.flutter_dash,
-    Icons.code,
-    Icons.computer,
-    Icons.code_off,
   ];
 
   @override

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:my_portfolio2/pages/about_page.dart';
 import 'package:my_portfolio2/pages/achievements_page.dart';
 import 'package:my_portfolio2/pages/contact_page.dart';
@@ -14,6 +14,21 @@ import 'package:my_portfolio2/widgets/cusom_TapBar.dart';
 import 'package:my_portfolio2/widgets/cusom_generate_section.dart';
 import 'package:my_portfolio2/widgets/custom_fotter.dart';
 import 'package:my_portfolio2/widgets/section_widget.dart';
+
+/// 👇 Physics لتسريع scroll
+class FastScrollPhysics extends ScrollPhysics {
+  const FastScrollPhysics({ScrollPhysics? parent}) : super(parent: parent);
+
+  @override
+  FastScrollPhysics applyTo(ScrollPhysics? ancestor) {
+    return FastScrollPhysics(parent: buildParent(ancestor));
+  }
+
+  @override
+  double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
+    return offset * 2.5; // زيادة السرعة حسب الحاجة
+  }
+}
 
 class PortfolioOnePage extends StatefulWidget {
   const PortfolioOnePage({super.key});
@@ -53,7 +68,6 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
     super.dispose();
   }
 
-  /// Helper function to wrap widgets in SliverToBoxAdapter
   Widget _sliver({Key? key, required Widget child}) {
     return SliverToBoxAdapter(key: key, child: child);
   }
@@ -96,7 +110,7 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
       ),
       body: Stack(
         children: [
-          /// 🎨 الخلفية المتحركة
+          /// 🎨 الخلفية المتحركة مع تحسين الأداء
           Positioned.fill(
             child: RepaintBoundary(
               child: CodingBackground(controller: _bgController),
@@ -106,6 +120,7 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
           /// 💻 المحتوى باستخدام Slivers
           CustomScrollView(
             controller: _scroll,
+            physics: const FastScrollPhysics(), // 👈 السرعة السريعة
             slivers: [
               _sliver(
                 key: _coverKey,
@@ -116,57 +131,23 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
                   child: CoverSection(contactKey: contactKey),
                 ),
               ),
-              _sliver(child: SizedBox(height: 20)),
-
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: _aboutKey,
-                child: Section(child: const AboutSection()),
-              ),
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: _educationKey,
-                child: Section(child: const EducationSection()),
-              ),
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: _skillsKey,
-                child: Section(child: const SkillsSection()),
-              ),
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: _experienceKey,
-                child: Section(child: const ExperienceSection()),
-              ),
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: _servicesKey,
-                child: Section(child: const ServicesSection()),
-              ),
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: _projectsKey,
-                child: Section(child: const ProjectsSection()),
-              ),
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: _achievementsKey,
-                child: Section(child: AchievementsSection()),
-              ),
-              _sliver(child: Separator()),
-
-              _sliver(
-                key: contactKey,
-                child: Section(child: const ContactSection()),
-              ),
-
+              _sliver(child: const SizedBox(height: 20)),
+              _sliver(child: const Separator()),
+              _sliver(key: _aboutKey, child: Section(child: const AboutSection())),
+              _sliver(child: const Separator()),
+              _sliver(key: _educationKey, child: Section(child: const EducationSection())),
+              _sliver(child: const Separator()),
+              _sliver(key: _skillsKey, child: Section(child: const SkillsSection())),
+              _sliver(child: const Separator()),
+              _sliver(key: _experienceKey, child: Section(child: const ExperienceSection())),
+              _sliver(child: const Separator()),
+              _sliver(key: _servicesKey, child: Section(child: const ServicesSection())),
+              _sliver(child: const Separator()),
+              _sliver(key: _projectsKey, child: Section(child: const ProjectsSection())),
+              _sliver(child: const Separator()),
+              _sliver(key: _achievementsKey, child: Section(child:  AchievementsSection())),
+              _sliver(child: const Separator()),
+              _sliver(key: contactKey, child: Section(child: const ContactSection())),
               _sliver(child: const Footer()),
             ],
           ),

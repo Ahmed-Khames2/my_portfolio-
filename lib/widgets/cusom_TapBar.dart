@@ -28,7 +28,6 @@ class _TopBarState extends State<TopBar> {
     "achievements",
     "contact",
   ];
-
   String hoveredItem = "";
 
   @override
@@ -36,13 +35,11 @@ class _TopBarState extends State<TopBar> {
     final isMobile = MediaQuery.of(context).size.width < 980;
     final colorScheme = Theme.of(context).colorScheme;
 
-    // ================= Theme Switch (Icon بدل Switch) =================
     Widget themeSwitch() {
       return BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           AppTheme currentTheme = AppTheme.todoLight;
           if (state is LoadingThemeState) currentTheme = state.appTheme;
-
           final isDark = currentTheme == AppTheme.todoDark;
 
           return IconButton(
@@ -69,7 +66,6 @@ class _TopBarState extends State<TopBar> {
       );
     }
 
-    // ================= Language Switch =================
     Widget languageIcon() {
       return BlocBuilder<LocaleCubit, LocaleState>(
         builder: (context, state) {
@@ -93,7 +89,6 @@ class _TopBarState extends State<TopBar> {
       );
     }
 
-    // ================= Menu Links =================
     Widget menuLinks() {
       return Row(
         mainAxisSize: MainAxisSize.min,
@@ -131,62 +126,92 @@ class _TopBarState extends State<TopBar> {
       );
     }
 
-    // ================= AppBar =================
     return AppBar(
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 2,
       leadingWidth: 0,
-      title: Row(
-        children: [
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Ahmed'.tr(context),
-                  style: TextStyle(
-                    color: colorScheme.primary,
-                    fontSize: isMobile ? 16 : 20,
-                    fontWeight: FontWeight.bold,
+      title:
+          isMobile
+              ? Row(
+                children: [
+                  // الاسم أصغر على الموبايل
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Ahmed'.tr(context),
+                          style: TextStyle(
+                            color: colorScheme.primary,
+                            fontSize: 16, // أصغر حجم من الويب
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Khames'.tr(context),
+                          style: TextStyle(
+                            color: colorScheme.secondary,
+                            fontSize: 16, // أصغر حجم من الويب
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: 'Khames'.tr(context),
-                  style: TextStyle(
-                    color: colorScheme.secondary,
-                    fontSize: isMobile ? 16 : 20,
-                    fontWeight: FontWeight.bold,
+                  const Spacer(),
+                  languageIcon(),
+                  themeSwitch(),
+                  // أيقونة المنيو على اليمين
+                  PopupMenuButton<String>(
+                    onSelected: widget.onNav,
+                    itemBuilder:
+                        (c) =>
+                            items
+                                .map(
+                                  (e) => PopupMenuItem<String>(
+                                    value: e,
+                                    child: Text(
+                                      e.tr(context),
+                                      style: TextStyle(
+                                        color: colorScheme.onBackground,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                    icon: Icon(Icons.menu, color: colorScheme.onBackground),
                   ),
-                ),
-              ],
-            ),
-          ),
-          const Spacer(),
-          if (!isMobile) menuLinks(),
-          if (isMobile)
-            PopupMenuButton<String>(
-              onSelected: widget.onNav,
-              itemBuilder:
-                  (c) =>
-                      items
-                          .map(
-                            (e) => PopupMenuItem<String>(
-                              value: e,
-                              child: Text(
-                                e.tr(context),
-                                style: TextStyle(
-                                  color: colorScheme.onBackground,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-              icon: Icon(Icons.menu, color: colorScheme.onBackground),
-            ),
-          languageIcon(),
-          themeSwitch(),
-          const SizedBox(width: 16),
-        ],
-      ),
+                ],
+              )
+              : Row(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Ahmed'.tr(context),
+                          style: TextStyle(
+                            color: colorScheme.primary,
+                            fontSize: 20, // حجم الويب يبقى أكبر
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Khames'.tr(context),
+                          style: TextStyle(
+                            color: colorScheme.secondary,
+                            fontSize: 20, // حجم الويب يبقى أكبر
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  menuLinks(),
+                  languageIcon(),
+                  themeSwitch(),
+                ],
+              ),
     );
   }
 }
