@@ -47,9 +47,9 @@ class _CodingBackgroundState extends State<CodingBackground> {
       final isIcon = _rnd.nextBool();
       final angle = _rnd.nextDouble() * 2 * pi;
 
-      // 👇 هنا قللت السرعة علشان الحركة تبقى أبطأ
       final speed = 0.0001 + _rnd.nextDouble() * 0.0003;
 
+      // نستخدم متغير placeholder للون، سيتم تغييره لاحقاً في build
       return _CodingSymbol(
         text: isIcon ? null : symbolsList[_rnd.nextInt(symbolsList.length)],
         icon: isIcon ? iconsList[_rnd.nextInt(iconsList.length)] : null,
@@ -58,13 +58,15 @@ class _CodingBackgroundState extends State<CodingBackground> {
         size: 14 + _rnd.nextDouble() * 18,
         dx: cos(angle) * speed,
         dy: sin(angle) * speed,
-        color: Colors.blueAccent.withOpacity(0.05 + _rnd.nextDouble() * 0.1),
+        color: Colors.transparent, // placeholder
       );
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return AnimatedBuilder(
       animation: widget.controller,
       builder: (context, _) {
@@ -76,6 +78,11 @@ class _CodingBackgroundState extends State<CodingBackground> {
           if (s.x < 0) s.x = 1;
           if (s.y > 1) s.y = 0;
           if (s.y < 0) s.y = 1;
+
+          // تحديث اللون حسب الثيم
+          s.color = colorScheme.primary.withOpacity(
+            0.05 + _rnd.nextDouble() * 0.1,
+          );
         }
 
         return CustomPaint(

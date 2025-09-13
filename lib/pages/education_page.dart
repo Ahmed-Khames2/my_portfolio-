@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
+import 'package:my_portfolio2/widgets/SectionTitle.dart';
 
 class EducationSection extends StatelessWidget {
   const EducationSection({super.key});
@@ -10,9 +10,9 @@ class EducationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 700;
     final t = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SingleChildScrollView(
-      // ✅ يخلي المحتوى كله يلف Scroll
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,9 +28,9 @@ class EducationSection extends StatelessWidget {
               vertical: isMobile ? 12 : 16,
             ),
             decoration: BoxDecoration(
-              color: AppColors.lightTextSecondary,
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(color: colorScheme.outline.withOpacity(.4)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.04),
@@ -48,9 +48,10 @@ class EducationSection extends StatelessWidget {
                   details: "education_assiut_details".tr(context),
                   isMobile: isMobile,
                   textTheme: t,
+                  colorScheme: colorScheme,
                 ),
                 const SizedBox(height: 14),
-                Divider(color: AppColors.divider, height: 1),
+                Divider(color: colorScheme.outline.withOpacity(.3), height: 1),
                 const SizedBox(height: 14),
 
                 EducationRow(
@@ -60,9 +61,10 @@ class EducationSection extends StatelessWidget {
                   details: "education_kafr_details".tr(context),
                   isMobile: isMobile,
                   textTheme: t,
+                  colorScheme: colorScheme,
                 ),
                 const SizedBox(height: 14),
-                Divider(color: AppColors.divider, height: 1),
+                Divider(color: colorScheme.outline.withOpacity(.3), height: 1),
                 const SizedBox(height: 14),
 
                 EducationRow(
@@ -72,9 +74,10 @@ class EducationSection extends StatelessWidget {
                   details: "education_depi_details".tr(context),
                   isMobile: isMobile,
                   textTheme: t,
+                  colorScheme: colorScheme,
                 ),
                 const SizedBox(height: 14),
-                Divider(color: AppColors.divider, height: 1),
+                Divider(color: colorScheme.outline.withOpacity(.3), height: 1),
                 const SizedBox(height: 14),
 
                 EducationRow(
@@ -84,6 +87,7 @@ class EducationSection extends StatelessWidget {
                   details: "education_udemy_details".tr(context),
                   isMobile: isMobile,
                   textTheme: t,
+                  colorScheme: colorScheme,
                 ),
               ],
             ),
@@ -98,6 +102,7 @@ class EducationRow extends StatelessWidget {
   final String icon, title, subtitle, details;
   final bool isMobile;
   final TextTheme textTheme;
+  final ColorScheme colorScheme;
   final double barWidth;
   final double imageWidth;
 
@@ -109,13 +114,13 @@ class EducationRow extends StatelessWidget {
     required this.details,
     required this.isMobile,
     required this.textTheme,
+    required this.colorScheme,
     this.barWidth = 4,
     double? imageWidth,
-  }) : imageWidth = imageWidth ?? ( /* عرض الصورة */ (700 < 700 ? 56 : 84));
+  }) : imageWidth = imageWidth ?? (700 < 700 ? 56 : 84);
 
   @override
   Widget build(BuildContext context) {
-    // علشان نخلي كل عناصر الرو بنفس الارتفاع ونخلي الصورة قد الخط
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -129,15 +134,15 @@ class EducationRow extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppColors.lightPrimary,
-                  AppColors.lightPrimary.withOpacity(.65),
+                  colorScheme.primary,
+                  colorScheme.primary.withOpacity(.65),
                 ],
               ),
             ),
           ),
           const SizedBox(width: 12),
 
-          // 🖼️ الصورة بنفس ارتفاع الصف كله
+          // 🖼️ الصورة
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: SizedBox(
@@ -146,7 +151,6 @@ class EducationRow extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   Image.asset(icon, fit: BoxFit.cover),
-                  // طبقة شفافة خفيفة تعطي حداثة
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -188,7 +192,7 @@ class EducationRow extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: textTheme.bodyMedium?.copyWith(
-                      color: AppColors.lightTextSecondary,
+                      color: colorScheme.onSurface.withOpacity(.7),
                       fontSize: isMobile ? 12.5 : 14,
                     ),
                   ),
@@ -196,7 +200,7 @@ class EducationRow extends StatelessWidget {
                   Text(
                     details,
                     style: textTheme.bodySmall?.copyWith(
-                      color: AppColors.lightTextSecondary.withOpacity(.9),
+                      color: colorScheme.onSurface.withOpacity(.6),
                       height: 1.35,
                       fontSize: isMobile ? 12 : 13,
                     ),

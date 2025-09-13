@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
+import 'package:my_portfolio2/widgets/SectionTitle.dart';
 
 class AchievementsSection extends StatelessWidget {
   AchievementsSection({super.key}); //error
@@ -85,24 +86,37 @@ class AchievementsSection extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       const SizedBox(height: 12),
-                                    InteractiveViewer(
-  panEnabled: false,
-  minScale: 1,
-  maxScale: 3, // تقدر تكبر/تصغر الصورة لو حبيت
-  child: LayoutBuilder(
-    builder: (context, constraints) {
-      final screenWidth = MediaQuery.of(context).size.width;
-      final screenHeight = MediaQuery.of(context).size.height;
+                                      InteractiveViewer(
+                                        panEnabled: false,
+                                        minScale: 1,
+                                        maxScale:
+                                            3, // تقدر تكبر/تصغر الصورة لو حبيت
+                                        child: LayoutBuilder(
+                                          builder: (context, constraints) {
+                                            final screenWidth =
+                                                MediaQuery.of(
+                                                  context,
+                                                ).size.width;
+                                            final screenHeight =
+                                                MediaQuery.of(
+                                                  context,
+                                                ).size.height;
 
-      return Image.asset(
-        item["image"],
-        fit: BoxFit.contain, // يخليها كاملة بدون ما تتاكل
-        width: screenWidth * 0.9, // تاخد 90% من عرض الشاشة
-        height: screenHeight * 0.6, // 60% من ارتفاع الشاشة
-      );
-    },
-  ),
-),
+                                            return Image.asset(
+                                              item["image"],
+                                              fit:
+                                                  BoxFit
+                                                      .contain, // يخليها كاملة بدون ما تتاكل
+                                              width:
+                                                  screenWidth *
+                                                  0.9, // تاخد 90% من عرض الشاشة
+                                              height:
+                                                  screenHeight *
+                                                  0.6, // 60% من ارتفاع الشاشة
+                                            );
+                                          },
+                                        ),
+                                      ),
 
                                       const SizedBox(height: 12),
                                       ElevatedButton(

@@ -18,6 +18,7 @@ class SkillCategoryTitle extends StatelessWidget {
     final isMobile = MediaQuery.of(context).size.width < 400;
 
     return ShaderMask(
+      blendMode: BlendMode.srcIn, // مهم علشان يطبق التدرج
       shaderCallback:
           (bounds) => gradient.createShader(
             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
@@ -25,7 +26,11 @@ class SkillCategoryTitle extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: isMobile ? 24 : 32, color: Colors.white),
+          Icon(
+            icon,
+            size: isMobile ? 24 : 32,
+            color: Colors.white,
+          ), // دايمًا أبيض
           const SizedBox(width: 8),
           Flexible(
             child: Text(
@@ -34,7 +39,7 @@ class SkillCategoryTitle extends StatelessWidget {
               style: t.titleLarge?.copyWith(
                 fontSize: isMobile ? 16 : 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // ShaderMask محتاج لون أبيض
+                color: Colors.white, // دايمًا أبيض علشان ShaderMask يشتغل
               ),
             ),
           ),

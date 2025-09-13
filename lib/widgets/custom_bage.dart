@@ -8,14 +8,22 @@ class Badge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.lightTextSecondary,
+        color: colorScheme.surface, // بدل AppColors.lightTextSecondary
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: colorScheme.onSurface.withOpacity(0.2)),
       ),
-      child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
+      child: Text(
+        text,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: colorScheme.onSurface),
+      ),
     );
   }
 }

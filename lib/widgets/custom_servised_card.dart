@@ -26,6 +26,11 @@ class _ServiceCardState extends State<ServiceCard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    final isDark = theme.brightness == Brightness.dark;
     final isActive = widget.isCenter || _hovered;
 
     double cardWidth =
@@ -34,6 +39,21 @@ class _ServiceCardState extends State<ServiceCard> {
             : size.width < 1200
             ? size.width * 0.45
             : 380;
+
+    final backgroundGradient =
+        isActive
+            ? [
+              widget.iconColor.withOpacity(0.3),
+              widget.iconColor.withOpacity(0.1),
+            ]
+            : isDark
+            ? [colorScheme.surfaceVariant, colorScheme.surface]
+            : [
+              colorScheme.surface,
+              colorScheme.surfaceVariant.withOpacity(0.4),
+            ];
+
+    final textColor = colorScheme.onSurface;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -50,13 +70,7 @@ class _ServiceCardState extends State<ServiceCard> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors:
-                isActive
-                    ? [
-                      widget.iconColor.withOpacity(0.3),
-                      widget.iconColor.withOpacity(0.1),
-                    ]
-                    : [Colors.grey.shade50, Colors.grey.shade100],
+            colors: backgroundGradient,
           ),
           boxShadow: [
             BoxShadow(
@@ -97,19 +111,18 @@ class _ServiceCardState extends State<ServiceCard> {
               ),
               child: Icon(widget.icon, color: Colors.white, size: 52),
             ),
-            // const SizedBox(height: 18),
-            Spacer(),
+            const Spacer(),
             // العنوان
             Text(
               widget.title,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: textTheme.titleMedium?.copyWith(
                 fontSize:
                     isActive
                         ? (size.width < 600 ? 18 : 22)
                         : (size.width < 600 ? 16 : 20),
                 fontWeight: FontWeight.bold,
-                color: AppColors.lightBackground,
+                color: textColor,
               ),
             ),
             const SizedBox(height: 12),
@@ -120,9 +133,9 @@ class _ServiceCardState extends State<ServiceCard> {
                 child: Text(
                   widget.desc,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: textTheme.bodyMedium?.copyWith(
                     fontSize: isActive ? 15 : 13,
-                    color: AppColors.lightBackground.withOpacity(0.9),
+                    color: textColor.withOpacity(0.9),
                     height: 1.4,
                   ),
                 ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/models/project_data.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
-import 'package:my_portfolio2/pages/ProjectDetailsPage.dart'; // تم إضافة هذا
+import 'package:my_portfolio2/pages/ProjectDetailsPage.dart';
 
 class ProjectCard extends StatefulWidget {
   final ProjectModel project;
@@ -26,6 +26,7 @@ class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -35,13 +36,13 @@ class _ProjectCardState extends State<ProjectCard> {
         curve: Curves.easeOut,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: AppColors.lightTextSecondary,
+          color: theme.cardColor, // 🌙 يدعم الداكن والفاتح
           boxShadow: [
             BoxShadow(
               color:
                   _isHovered
                       ? widget.headerColor.withOpacity(0.5)
-                      : Colors.black.withOpacity(0.1),
+                      : theme.shadowColor.withOpacity(0.1),
               blurRadius: _isHovered ? 20 : 8,
               offset: const Offset(0, 8),
             ),
@@ -118,6 +119,7 @@ class _ProjectCardState extends State<ProjectCard> {
                               style: t.titleMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
+                                color: theme.textTheme.bodyLarge?.color,
                               ),
                             ),
                           ),
@@ -132,7 +134,8 @@ class _ProjectCardState extends State<ProjectCard> {
                         child: Text(
                           widget.project.description,
                           style: t.bodyMedium?.copyWith(
-                            color: Colors.grey[700],
+                            color: theme.textTheme.bodyMedium?.color
+                                ?.withOpacity(0.8),
                             height: 1.4,
                           ),
                           maxLines: 2,
@@ -165,7 +168,10 @@ class _ProjectCardState extends State<ProjectCard> {
                           _buildButton(
                             icon: Icons.code,
                             label: "GitHub",
-                            color: Colors.black87,
+                            color:
+                                theme.brightness == Brightness.dark
+                                    ? Colors.white54
+                                    : Colors.black87,
                             onTap: () {
                               if (widget.project.downloadUrl.isNotEmpty) {
                                 openUrl(widget.project.downloadUrl);

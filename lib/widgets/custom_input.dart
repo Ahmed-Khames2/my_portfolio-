@@ -1,7 +1,6 @@
 // custom_input.dart
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
-
 class Input extends StatelessWidget {
   final String hint;
   final int maxLines;
@@ -18,6 +17,11 @@ class Input extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final fillColor = theme.inputDecorationTheme.fillColor ?? theme.colorScheme.surface;
+    final borderColor = theme.colorScheme.onSurface.withOpacity(0.2);
+    final focusedColor = theme.colorScheme.primary;
+
     return TextFormField(
       controller: controller,
       maxLines: maxLines,
@@ -25,25 +29,19 @@ class Input extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
-        fillColor: const Color(0xFF1F2023),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 14,
-          vertical: 14,
-        ),
+        fillColor: fillColor,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: borderColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: borderColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.lightPrimary,
-            width: 1.2,
-          ),
+          borderSide: BorderSide(color: focusedColor, width: 1.2),
         ),
       ),
     );

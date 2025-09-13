@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/widgets/custom_input.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart'; // 👈 مهم عشان .tr
+import 'package:my_portfolio2/core/app_locallizatin.dart';
 
 class FormContact extends StatefulWidget {
   const FormContact({super.key});
@@ -38,11 +37,9 @@ class _FormContactState extends State<FormContact> {
         },
       );
 
-      // ✅ تنظيف الحقول
       nameController.clear();
       emailController.clear();
       messageController.clear();
-
       FocusScope.of(context).unfocus();
 
       _showDialog("success_title".tr(context), "success_msg".tr(context));
@@ -55,6 +52,8 @@ class _FormContactState extends State<FormContact> {
   }
 
   void _showDialog(String title, String message) {
+    final theme = Theme.of(context);
+
     showDialog(
       context: context,
       builder:
@@ -62,15 +61,29 @@ class _FormContactState extends State<FormContact> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            title: Text(title),
-            content: Text(message),
+            backgroundColor: theme.colorScheme.surface,
+            title: Text(
+              title,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+            content: Text(
+              message,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurface.withOpacity(0.9),
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                   FocusScope.of(context).unfocus();
                 },
-                child: Text("ok".tr(context)),
+                child: Text(
+                  "ok".tr(context),
+                  style: TextStyle(color: theme.colorScheme.primary),
+                ),
               ),
             ],
           ),
@@ -79,6 +92,8 @@ class _FormContactState extends State<FormContact> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Form(
       key: _formKey,
       child: AbsorbPointer(
@@ -86,9 +101,9 @@ class _FormContactState extends State<FormContact> {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppColors.lightTextSecondary,
+            color: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(color: theme.dividerColor),
           ),
           child: Column(
             children: [
@@ -106,9 +121,8 @@ class _FormContactState extends State<FormContact> {
                 hint: "your_email".tr(context),
                 controller: emailController,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.isEmpty)
                     return "validate_email".tr(context);
-                  }
                   if (!RegExp(
                     r"^[\w-\.]+@([\w-]+\.)+[\w]{2,4}",
                   ).hasMatch(value)) {
@@ -133,9 +147,15 @@ class _FormContactState extends State<FormContact> {
                 alignment: Alignment.centerRight,
                 child:
                     _isLoading
-                        ? const CircularProgressIndicator()
+                        ? CircularProgressIndicator(
+                          color: theme.colorScheme.primary,
+                        )
                         : ElevatedButton(
                           onPressed: sendMessage,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: theme.colorScheme.primary,
+                            foregroundColor: theme.colorScheme.onPrimary,
+                          ),
                           child: Text("send_message".tr(context)),
                         ),
               ),

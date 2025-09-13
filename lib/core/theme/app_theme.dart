@@ -10,52 +10,58 @@ enum AppTheme {
 }
 
 final appThemeData = {
+  // 🌞 Light Theme
   AppTheme.todoLight: ThemeData(
     fontFamily: 'Cairo',
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       primary: AppColors.lightPrimary,
-      onPrimary: AppColors.lightTextPrimary,
+      onPrimary: Colors.white,
       secondary: AppColors.lightSecondary,
-      onSecondary: AppColors.lightTextPrimary,
-      background: AppColors.lightBackground,
+      onSecondary: Colors.white,
+      background: const Color(0xFFF2F4F7), // 👈 رمادي فاتح مريح
       onBackground: AppColors.lightTextPrimary,
-      surface: AppColors.lightSurface,
+      surface: const Color(0xFFFFFFFF), // card/background فاتح
       onSurface: AppColors.lightTextSecondary,
       error: AppColors.error,
       onError: Colors.white,
     ),
-    scaffoldBackgroundColor: AppColors.lightBackground,
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.lightPrimary,
-      foregroundColor: Colors.white,
-      elevation: 0,
+    scaffoldBackgroundColor: const Color(0xFFF2F4F7), // 👈 مش أبيض صريح
+    // ✅ AppBar بلون رمادي خفيف مش pure white
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color(0xFFF9FAFB), // off-white
+      foregroundColor: Colors.black87,
+      elevation: 1,
       centerTitle: true,
-      titleTextStyle: const TextStyle(
-        color: Colors.white,
+      titleTextStyle: TextStyle(
+        color: Colors.black87,
         fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
     ),
-    listTileTheme: ListTileThemeData(
-      tileColor: AppColors.lightSurface,
+
+    listTileTheme: const ListTileThemeData(
+      tileColor: Colors.white, // card-style
       textColor: AppColors.lightTextPrimary,
-      iconColor: AppColors.lightPrimary,
+      iconColor: AppColors.lightSecondary,
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.lightBackground,
+
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
       selectedItemColor: AppColors.lightPrimary,
       unselectedItemColor: AppColors.lightTextSecondary,
       showUnselectedLabels: true,
       elevation: 10,
     ),
+
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.lightPrimary,
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.lightPrimary,
@@ -64,47 +70,58 @@ final appThemeData = {
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
+
     textTheme: const TextTheme(
       bodyMedium: TextStyle(color: AppColors.lightTextPrimary),
       titleMedium: TextStyle(color: AppColors.lightTextPrimary),
     ),
+
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.lightBackground,
+        side: const BorderSide(color: AppColors.lightSecondary, width: 1.5),
+        textStyle: const TextStyle(fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      ),
+    ),
   ),
 
+  // 🌙 Dark Theme
   AppTheme.todoDark: ThemeData(
     fontFamily: 'Cairo',
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
       primary: AppColors.darkPrimary,
-      onPrimary: AppColors.darkTextPrimary,
+      onPrimary: Colors.white, // لازم فاتح يبان فوق الأزرق الغامق
       secondary: AppColors.darkSecondary,
-      onSecondary: AppColors.darkTextPrimary,
+      onSecondary: Colors.black,
       background: AppColors.darkBackground,
       onBackground: AppColors.darkTextPrimary,
       surface: AppColors.darkSurface,
       onSurface: AppColors.darkTextSecondary,
       error: AppColors.error,
-      onError: Colors.black,
+      onError: Colors.white,
     ),
     scaffoldBackgroundColor: AppColors.darkBackground,
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.darkPrimary,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.darkSurface,
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
         color: Colors.white,
         fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
     ),
-    listTileTheme: ListTileThemeData(
+    listTileTheme: const ListTileThemeData(
       tileColor: AppColors.darkSurface,
       textColor: AppColors.darkTextPrimary,
       iconColor: AppColors.darkSecondary,
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.darkBackground,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.darkSurface,
       selectedItemColor: AppColors.darkPrimary,
       unselectedItemColor: AppColors.darkTextSecondary,
       showUnselectedLabels: true,
@@ -112,7 +129,7 @@ final appThemeData = {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: AppColors.darkPrimary,
+        foregroundColor: AppColors.darkSecondary,
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
@@ -127,6 +144,14 @@ final appThemeData = {
     textTheme: const TextTheme(
       bodyMedium: TextStyle(color: AppColors.darkTextPrimary),
       titleMedium: TextStyle(color: AppColors.darkTextPrimary),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.white, // يخلي النص و الأيقونة تبان
+        side: const BorderSide(color: Colors.white, width: 1.5),
+        textStyle: const TextStyle(fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      ),
     ),
   ),
 };

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/models/project_data.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
+import 'package:my_portfolio2/widgets/SectionTitle.dart';
 import 'package:my_portfolio2/widgets/custom_project_card.dart';
 
 class ProjectsSection extends StatefulWidget {

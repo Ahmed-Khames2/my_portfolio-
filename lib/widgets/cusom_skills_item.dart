@@ -1,7 +1,6 @@
 /* ========================= SKILL CARD ========================= */
 import 'package:flutter/material.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
-
 class SkillCard extends StatelessWidget {
   final String name;
   final double level;
@@ -21,13 +20,14 @@ class SkillCard extends StatelessWidget {
     final t = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
     final isMobile = size.width < 600;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
       width: isMobile ? double.infinity : 250,
       margin: EdgeInsets.symmetric(vertical: isMobile ? 8 : 12),
       padding: EdgeInsets.all(isMobile ? 12 : 16),
       decoration: BoxDecoration(
-        color: AppColors.lightTextSecondary,
+        color: colorScheme.surface, // بدل اللون الثابت
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -61,6 +61,7 @@ class SkillCard extends StatelessWidget {
                 style: t.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   fontSize: isMobile ? 14 : 16,
+                  color: colorScheme.onSurface, // يدعم Dark/Light
                 ),
               ),
               const SizedBox(height: 12),
@@ -69,15 +70,11 @@ class SkillCard extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: level,
                   minHeight: isMobile ? 8 : 10,
-                  backgroundColor: AppColors.divider,
+                  backgroundColor: colorScheme.onSurface.withOpacity(0.1),
                   color: bgColor,
                 ),
               ),
               const SizedBox(height: 26),
-              // Text(
-              //   "${(level * 100).toInt()}%",
-              //   style: t.bodySmall?.copyWith(color: Colors.grey[600]),
-              // ),
             ],
           ),
         ],

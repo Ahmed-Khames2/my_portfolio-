@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/core/cubit/locale_cubit.dart';
 import 'package:my_portfolio2/core/app_locallizatin.dart';
 import 'package:my_portfolio2/core/theme/bloc/theme_bloc.dart';
@@ -35,69 +34,59 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 980;
+    final colorScheme = Theme.of(context).colorScheme;
 
-    // ================= Theme Switch =================
+    // ================= Theme Switch (Icon بدل Switch) =================
     Widget themeSwitch() {
       return BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           AppTheme currentTheme = AppTheme.todoLight;
           if (state is LoadingThemeState) currentTheme = state.appTheme;
 
-          return MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: TweenAnimationBuilder<double>(
-              duration: const Duration(milliseconds: 150),
-              tween: Tween(begin: 1.0, end: 1.0),
-              builder: (context, scale, child) {
-                return Transform.scale(
-                  scale: scale,
-                  child: Switch(
-                    value: currentTheme == AppTheme.todoDark,
-                    onChanged: (val) {
-                      context.read<ThemeBloc>().add(
-                        ChangeThemeEvent(
-                          val ? AppTheme.todoDark : AppTheme.todoLight,
-                        ),
-                      );
-                    },
-                    activeColor: AppColors.lightPrimary,
-                    inactiveThumbColor: AppColors.lightSecondary,
-                    inactiveTrackColor: AppColors.lightSecondary.withOpacity(
-                      0.3,
-                    ),
-                  ),
-                );
-              },
+          final isDark = currentTheme == AppTheme.todoDark;
+
+          return IconButton(
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder:
+                  (child, anim) =>
+                      RotationTransition(turns: anim, child: child),
+              child: Icon(
+                isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                key: ValueKey(isDark),
+                color: colorScheme.primary,
+              ),
             ),
+            onPressed: () {
+              context.read<ThemeBloc>().add(
+                ChangeThemeEvent(
+                  isDark ? AppTheme.todoLight : AppTheme.todoDark,
+                ),
+              );
+            },
           );
         },
       );
     }
 
-    // ================= Language Icon =================
+    // ================= Language Switch =================
     Widget languageIcon() {
       return BlocBuilder<LocaleCubit, LocaleState>(
         builder: (context, state) {
           final currentLang =
               state is ChangeLocaleState ? state.locale.languageCode : 'en';
+          final newLang = currentLang == "en" ? "ar" : "en";
 
-          return MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: TweenAnimationBuilder<double>(
-              duration: const Duration(milliseconds: 150),
-              tween: Tween(begin: 1.0, end: 1.0),
-              builder: (context, scale, child) {
-                return Transform.scale(
-                  scale: scale,
-                  child: IconButton(
-                    icon: Icon(Icons.language, color: AppColors.lightPrimary),
-                    onPressed: () {
-                      final newLang = currentLang == "en" ? "ar" : "en";
-                      context.read<LocaleCubit>().changeLanguage(newLang);
-                    },
-                  ),
-                );
-              },
+          return TextButton(
+            onPressed:
+                () => context.read<LocaleCubit>().changeLanguage(newLang),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              foregroundColor: colorScheme.secondary,
+            ),
+            child: Text(
+              currentLang.toUpperCase(),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           );
         },
@@ -119,25 +108,21 @@ class _TopBarState extends State<TopBar> {
                   onExit: (_) => setState(() => hoveredItem = ""),
                   child: GestureDetector(
                     onTap: () => widget.onNav(e),
-                    child: TweenAnimationBuilder<double>(
-                      duration: const Duration(milliseconds: 150),
-                      tween: Tween(begin: 1.0, end: isHovered ? 1.05 : 1.0),
-                      builder: (context, scale, child) {
-                        return Transform.scale(
-                          scale: scale,
-                          child: Text(
-                            e.tr(context),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color:
-                                  isHovered
-                                      ? AppColors.lightPrimary
-                                      : AppColors.lightBackground,
-                            ),
-                          ),
-                        );
-                      },
+                    child: AnimatedDefaultTextStyle(
+                      duration: const Duration(milliseconds: 200),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color:
+                            isHovered
+                                ? colorScheme.primary
+                                : colorScheme.onBackground,
+                        decoration:
+                            isHovered
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                      ),
+                      child: Text(e.tr(context)),
                     ),
                   ),
                 ),
@@ -146,8 +131,9 @@ class _TopBarState extends State<TopBar> {
       );
     }
 
+    // ================= AppBar =================
     return AppBar(
-      backgroundColor: AppColors.lightTextPrimary.withOpacity(0.9),
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 2,
       leadingWidth: 0,
       title: Row(
@@ -158,7 +144,7 @@ class _TopBarState extends State<TopBar> {
                 TextSpan(
                   text: 'Ahmed'.tr(context),
                   style: TextStyle(
-                    color: AppColors.lightPrimary,
+                    color: colorScheme.primary,
                     fontSize: isMobile ? 16 : 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -166,7 +152,7 @@ class _TopBarState extends State<TopBar> {
                 TextSpan(
                   text: 'Khames'.tr(context),
                   style: TextStyle(
-                    color: AppColors.lightSecondary,
+                    color: colorScheme.secondary,
                     fontSize: isMobile ? 16 : 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -188,13 +174,13 @@ class _TopBarState extends State<TopBar> {
                               child: Text(
                                 e.tr(context),
                                 style: TextStyle(
-                                  color: AppColors.lightBackground,
+                                  color: colorScheme.onBackground,
                                 ),
                               ),
                             ),
                           )
                           .toList(),
-              icon: Icon(Icons.menu, color: AppColors.lightBackground),
+              icon: Icon(Icons.menu, color: colorScheme.onBackground),
             ),
           languageIcon(),
           themeSwitch(),
