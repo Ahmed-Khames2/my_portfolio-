@@ -17,15 +17,15 @@
 
   
   "hi_im": "Hi, I'm Ahmed Khamis",
-  "junior": "Junior ",
+  "junior": "",
   "flutter_dev": "Flutter Developer",
-  "cs_student": " • Computer Science Student",
+  "cs_student": " • Computer Science Graduate",
   "specialization": "I specialize in building clean, performant mobile and web apps using Flutter. Passionate about software engineering, scalable architecture, and problem solving.",
   "location": "Alexandria, Egypt",
   "availability": "Available for new projects",
 
   "about_me": "About Me",
-  "about_intro": "Hi 👋 I’m Ahmed Khames, a Computer Science student and a dedicated ",
+  "about_intro": "Hi 👋 I’m Ahmed Khames, a Computer Science Graduate and a dedicated ",
   "about_mid": " with a true passion for building modern, user-friendly, and scalable applications.\n\n My journey in programming started early with curiosity about how things work in tech. Along the way, I explored different fields like ",
   "web_frontend": "Web Frontend",
   "about_ai": " development and even experimented with ",
@@ -111,8 +111,8 @@
   "education_assiut_details": "Completed first year of study before transfer.",
 
   "education_kafr_title": "B.Sc. in Computer Science",
-  "education_kafr_subtitle": "Kafr El Sheikh University — 2023–2026",
-  "education_kafr_details": "GPA: 3.5 • Focus on Algorithms, Databases, Networking",
+  "education_kafr_subtitle": "Kafr El Sheikh University — Graduate",
+  "education_kafr_details": "Bachelor's Degree in Computer Science • GPA: 3.5 • Specialized in Software Engineering, Algorithms & Databases.",
 
   "education_depi_title": "Digital Egypt Pioneers Initiative",
   "education_depi_subtitle": "DEPI — 2024–2025",
