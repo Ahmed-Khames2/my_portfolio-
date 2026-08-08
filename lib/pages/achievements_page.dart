@@ -24,8 +24,8 @@ class AchievementsSection extends StatelessWidget {
       "titleKey": "education_depi_titlea",
       "subtitleKey": "education_depi_subtitlea",
       "image": "assets/images/DEPI_CERTIFICATE.jpeg",
-      "icon": Icons.school,
-      "iconColor": Colors.blue,
+      "icon": Icons.workspace_premium,
+      "iconColor": Colors.amber,
     },
     {
       "titleKey": "first_app",
@@ -44,181 +44,369 @@ class AchievementsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isDesktop = screenWidth >= 800;
+
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SectionTitle("achievements".tr(context)),
-          const SizedBox(height: 16),
-          ...items.map((item) => _buildListItem(context, item)),
+          const SizedBox(height: 20),
+          if (isDesktop)
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 2.6,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return _AchievementCard(item: items[index]);
+              },
+            )
+          else
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: items.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 12),
+              itemBuilder: (context, index) {
+                return _AchievementCard(item: items[index]);
+              },
+            ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildListItem(BuildContext context, Map<String, dynamic> item) {
-    bool hasImage = item.containsKey("image");
-    bool hasDownloads = item.containsKey("downloads");
+class _AchievementCard extends StatefulWidget {
+  final Map<String, dynamic> item;
+
+  const _AchievementCard({required this.item});
+
+  @override
+  State<_AchievementCard> createState() => _AchievementCardState();
+}
+
+class _AchievementCardState extends State<_AchievementCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final item = widget.item;
+    final bool hasImage = item.containsKey("image");
+    final bool hasDownloads = item.containsKey("downloads");
+    final bool isClickable = hasImage || hasDownloads;
+
     final title = (item["titleKey"] as String).tr(context);
     final subtitle = (item["subtitleKey"] as String).tr(context);
+    final Color accentColor = item["iconColor"] ?? Theme.of(context).primaryColor;
 
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 4,
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        leading: Icon(item["icon"], color: item["iconColor"], size: 32),
-        title: Text(title),
-        subtitle: Text(subtitle),
-        onTap:
-            (hasImage || hasDownloads)
-                ? () {
-                  if (hasImage) {
-                    showDialog(
-                      context: context,
-                      builder:
-                          (_) => Dialog(
-                            backgroundColor: Colors.transparent,
-                            insetPadding: const EdgeInsets.all(16),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Container(
-                                color: Colors.transparent,
-                                // padding: const EdgeInsets.all(12),
-                                constraints: const BoxConstraints(
-                                  maxHeight: 550,
+    return MouseRegion(
+      cursor: isClickable ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: isClickable ? () => _handleTap(context, item, hasImage, hasDownloads) : null,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOutCubic,
+          transform: Matrix4.identity()..scale(_isHovered && isClickable ? 1.025 : 1.0, _isHovered && isClickable ? 1.025 : 1.0),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: _isHovered && isClickable ? accentColor.withValues(alpha: 0.6) : Colors.transparent,
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: _isHovered && isClickable
+                    ? accentColor.withValues(alpha: 0.2)
+                    : Colors.black.withValues(alpha: 0.06),
+                blurRadius: _isHovered && isClickable ? 16 : 8,
+                offset: Offset(0, _isHovered && isClickable ? 6 : 3),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Stack(
+              children: [
+                // Ribbon Accent on the side
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  width: 5,
+                  child: Container(color: accentColor),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      // Icon Avatar
+                      Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: accentColor.withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(item["icon"], color: accentColor, size: 26),
+                      ),
+                      const SizedBox(width: 14),
+
+                      // Text Content
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              subtitle,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.8),
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(width: 8),
+
+                      // Right Side: Thumbnail Preview or Hint Badge
+                      if (hasImage) ...[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Thumbnail Preview
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: accentColor.withValues(alpha: 0.4),
+                                  width: 1,
                                 ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const SizedBox(height: 12),
-                                      InteractiveViewer(
-                                        panEnabled: false,
-                                        minScale: 1,
-                                        maxScale: 3,
-                                        child: LayoutBuilder(
-                                          builder: (context, constraints) {
-                                            final screenWidth =
-                                                MediaQuery.of(
-                                                  context,
-                                                ).size.width;
-                                            final screenHeight =
-                                                MediaQuery.of(
-                                                  context,
-                                                ).size.height;
-
-                                            return Image.asset(
-                                              item["image"],
-                                              fit: BoxFit.contain,
-                                              width: screenWidth * 0.9,
-                                              height: screenHeight * 0.6,
-                                              // 🟢 هنا نضيف frameBuilder للـ loader
-                                              frameBuilder: (
-                                                BuildContext context,
-                                                Widget child,
-                                                int? frame,
-                                                bool wasSynchronouslyLoaded,
-                                              ) {
-                                                if (wasSynchronouslyLoaded) {
-                                                  return child;
-                                                }
-                                                return frame == null
-                                                    ? SizedBox(
-                                                      width: screenWidth * 0.9,
-                                                      height:
-                                                          screenHeight * 0.6,
-                                                      child: const Center(
-                                                        child:
-                                                            CircularProgressIndicator(),
-                                                      ),
-                                                    )
-                                                    : child;
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ),
-
-                                      const SizedBox(height: 12),
-                                      ElevatedButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: Text("close".tr(context)),
-                                      ),
-                                    ],
-                                  ),
+                                image: DecorationImage(
+                                  image: AssetImage(item["image"]),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 4),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: accentColor.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.visibility, size: 12, color: accentColor),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "view_certificate".tr(context),
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: accentColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ] else if (hasDownloads) ...[
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                    );
-                  } else if (hasDownloads) {
-                    _showDownloadsDialog(context, item);
-                  }
-                }
-                : null,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.download, size: 14, color: Colors.green),
+                              const SizedBox(width: 4),
+                              Text(
+                                "view_details".tr(context),
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 
-  Future<dynamic> _showDownloadsDialog(
-    BuildContext context,
-    Map<String, dynamic> item,
-  ) {
-    final title = (item["titleKey"] as String).tr(context);
-    return showDialog(
-      context: context,
-      builder:
-          (_) => Dialog(
-            backgroundColor: Colors.transparent,
-            insetPadding: const EdgeInsets.all(32),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Container(
-                width: 300,
-                color: Theme.of(context).colorScheme.surface,
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
+  void _handleTap(BuildContext context, Map<String, dynamic> item, bool hasImage, bool hasDownloads) {
+    if (hasImage) {
+      final title = (item["titleKey"] as String).tr(context);
+      showDialog(
+        context: context,
+        builder: (_) => Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.all(20),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 700, maxHeight: 600),
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.3),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Header Bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Navigator.pop(context),
+                        tooltip: "close".tr(context),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(height: 1),
+
+                // Image Viewer with Zoom
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                    child: InteractiveViewer(
+                      minScale: 1.0,
+                      maxScale: 4.0,
+                      child: Image.asset(
+                        item["image"],
+                        fit: BoxFit.contain,
+                        width: double.infinity,
                       ),
                     ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.download,
-                          color: Colors.green,
-                          size: 28,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          "${"downloads".tr(context)}: ${item["downloads"]}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text("close".tr(context)),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
-    );
+        ),
+      );
+    } else if (hasDownloads) {
+      final title = (item["titleKey"] as String).tr(context);
+      showDialog(
+        context: context,
+        builder: (_) => Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.all(24),
+          child: Container(
+            width: 320,
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.download, color: Colors.green, size: 24),
+                      const SizedBox(width: 8),
+                      Text(
+                        "${"downloads".tr(context)}: ${item["downloads"]}",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text("close".tr(context)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
