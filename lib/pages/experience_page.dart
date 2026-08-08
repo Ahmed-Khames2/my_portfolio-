@@ -1,8 +1,8 @@
 // experience_section.dart
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
-import 'package:my_portfolio2/widgets/SectionTitle.dart';
+import 'package:my_portfolio2/widgets/section_title.dart';
 
 class ExperienceSection extends StatelessWidget {
   const ExperienceSection({super.key});
@@ -31,7 +31,7 @@ class ExperienceSection extends StatelessWidget {
               border: Border.all(color: theme.dividerColor),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.03),
+                  color: Colors.black.withValues(alpha: 0.03),
                   blurRadius: 14,
                   offset: const Offset(0, 6),
                 ),
@@ -57,7 +57,7 @@ class ExperienceSection extends StatelessWidget {
                 Divider(color: theme.dividerColor),
                 const SizedBox(height: 12),
                 ExperienceRow(
-                  accentColor: theme.colorScheme.onBackground,
+                  accentColor: theme.colorScheme.onSurface,
                   imagePath: 'assets/images/DEPI.jpg',
                   title: "depi_title".tr(context),
                   period: "depi_period".tr(context),
@@ -130,7 +130,7 @@ class ExperienceRow extends StatelessWidget {
     final theme = Theme.of(context);
     final isMobile = MediaQuery.of(context).size.width < 500;
 
-    final secondaryColor = theme.colorScheme.onSurface.withOpacity(0.7);
+    final secondaryColor = theme.colorScheme.onSurface.withValues(alpha: 0.7);
 
     return isMobile
         ? Column(
@@ -183,9 +183,9 @@ class ExperienceRow extends StatelessWidget {
                             style: textTheme.bodySmall?.copyWith(fontSize: 11),
                           ),
                           backgroundColor: theme.colorScheme.primary
-                              .withOpacity(0.1),
+                              .withValues(alpha: 0.1),
                           side: BorderSide(
-                            color: theme.dividerColor.withOpacity(0.6),
+                            color: theme.dividerColor.withValues(alpha: 0.6),
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                         ),
@@ -220,7 +220,7 @@ class ExperienceRow extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   gradient: LinearGradient(
-                    colors: [accentColor, accentColor.withOpacity(.7)],
+                    colors: [accentColor, accentColor.withValues(alpha: 0.7)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -284,11 +284,11 @@ class ExperienceRow extends StatelessWidget {
                                     ),
                                     decoration: BoxDecoration(
                                       color: theme.colorScheme.primary
-                                          .withOpacity(0.1),
+                                          .withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
-                                        color: theme.dividerColor.withOpacity(
-                                          0.6,
+                                        color: theme.dividerColor.withValues(
+                                          alpha: 0.6,
                                         ),
                                       ),
                                     ),

@@ -108,15 +108,17 @@
   "education_assiut_title": "بكالوريوس علوم الحاسب",
   "education_assiut_subtitle": "جامعة أسيوط — 2022–2023",
   "education_assiut_details": "أنهيت السنة الأولى قبل التحويل.",
-
   "education_kafr_title": "بكالوريوس علوم الحاسب",
   "education_kafr_subtitle": "جامعة كفر الشيخ — 2023–2026",
-  "education_kafr_details": "المعدل الحالي: 3.40 • التركيز على الخوارزميات، قواعد البيانات، والشبكات",
+  "education_kafr_details": "المعدل التراكمي: 3.5 • التركيز على الخوارزميات، قواعد البيانات، والشبكات.",
 
-  "education_depi_title": "مبادرة رواد مصر الرقمية",
-  "education_depi_subtitle": "جارٍ — 2024–الآن",
-  "education_depi_details": "مبادرة قومية تركز على تطوير تطبيقات الهاتف باستخدام Flutter بشكل متقدم.",
+  "education_depi_title": "مبادرة رواد مصر الرقمية (DEPI)",
+  "education_depi_subtitle": "2024–2025",  
 
+  "education_depi_titlea": "شهادة DEPI - تطوير تطبيقات الهاتف",
+  "education_depi_subtitlea": "أكملت دبلومة وحصلت علي شهادة في تطوير تطبيقات الهاتف ",
+
+  "education_depi_details": "التخرج من دبلومة مبادرة رواد مصر الرقمية (DEPI) في تطوير تطبيقات الهاتف باستخدام Flutter.",
   "education_udemy_title": "معسكر تطوير فلاتر",
   "education_udemy_subtitle": "Udemy — 2023",
   "education_udemy_details": "مشاريع عملية باستخدام Flutter وDart، Firebase وREST APIs",
@@ -186,5 +188,6 @@
   "validate_email": "من فضلك أدخل بريدك الإلكتروني",
   "validate_email_format": "أدخل بريدًا صحيحًا",
   "validate_message": "من فضلك أدخل رسالتك"
+  
 
 }

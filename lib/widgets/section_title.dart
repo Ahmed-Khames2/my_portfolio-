@@ -25,7 +25,7 @@ class SectionTitle extends StatelessWidget {
                 letterSpacing: 1.5,
                 shadows: [
                   Shadow(
-                    color: colorScheme.primary.withOpacity(0.4), // ديناميكي
+                    color: colorScheme.primary.withValues(alpha: 0.4), // ديناميكي
                     blurRadius: 10,
                     offset: const Offset(2, 2),
                   ),
@@ -53,10 +53,8 @@ class SectionTitle extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      colorScheme.primary.withOpacity(0.8),
-                      colorScheme.surface.withOpacity(
-                        0.3,
-                      ), // 👈 يتغير حسب الثيم
+                      colorScheme.primary.withValues(alpha: 0.8),
+                      colorScheme.surface.withValues(alpha: 0.3),
                     ],
                   ),
                 ),

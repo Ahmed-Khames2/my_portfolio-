@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:my_portfolio2/pages/about_page.dart';
 import 'package:my_portfolio2/pages/achievements_page.dart';
 import 'package:my_portfolio2/pages/contact_page.dart';
@@ -9,26 +9,11 @@ import 'package:my_portfolio2/pages/projects_page.dart';
 import 'package:my_portfolio2/pages/services_page.dart';
 import 'package:my_portfolio2/pages/skills_page.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
-import 'package:my_portfolio2/utils/seperator.dart';
-import 'package:my_portfolio2/widgets/cusom_TapBar.dart';
-import 'package:my_portfolio2/widgets/cusom_generate_section.dart';
-import 'package:my_portfolio2/widgets/custom_fotter.dart';
+import 'package:my_portfolio2/utils/separator.dart';
+import 'package:my_portfolio2/widgets/custom_top_bar.dart';
+import 'package:my_portfolio2/widgets/coding_background.dart';
+import 'package:my_portfolio2/widgets/custom_footer.dart';
 import 'package:my_portfolio2/widgets/section_widget.dart';
-
-/// 👇 Physics لتسريع scroll
-class FastScrollPhysics extends ScrollPhysics {
-  const FastScrollPhysics({ScrollPhysics? parent}) : super(parent: parent);
-
-  @override
-  FastScrollPhysics applyTo(ScrollPhysics? ancestor) {
-    return FastScrollPhysics(parent: buildParent(ancestor));
-  }
-
-  @override
-  double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
-    return offset * 2; // زيادة السرعة حسب الحاجة
-  }
-}
 
 class PortfolioOnePage extends StatefulWidget {
   const PortfolioOnePage({super.key});
@@ -37,7 +22,7 @@ class PortfolioOnePage extends StatefulWidget {
 }
 
 class _PortfolioOnePageState extends State<PortfolioOnePage>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   final _scroll = ScrollController();
 
   final _coverKey = GlobalKey();
@@ -120,7 +105,6 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
           /// 💻 المحتوى باستخدام Slivers
           CustomScrollView(
             controller: _scroll,
-            physics: const FastScrollPhysics(), // 👈 السرعة السريعة
             slivers: [
               _sliver(
                 key: _coverKey,
@@ -133,21 +117,45 @@ class _PortfolioOnePageState extends State<PortfolioOnePage>
               ),
               _sliver(child: const SizedBox(height: 20)),
               _sliver(child: const Separator()),
-              _sliver(key: _aboutKey, child: Section(child: const AboutSection())),
+              _sliver(
+                key: _aboutKey,
+                child: Section(child: const AboutSection()),
+              ),
               _sliver(child: const Separator()),
-              _sliver(key: _educationKey, child: Section(child: const EducationSection())),
+              _sliver(
+                key: _educationKey,
+                child: Section(child: const EducationSection()),
+              ),
               _sliver(child: const Separator()),
-              _sliver(key: _skillsKey, child: Section(child: const SkillsSection())),
+              _sliver(
+                key: _skillsKey,
+                child: Section(child: const SkillsSection()),
+              ),
               _sliver(child: const Separator()),
-              _sliver(key: _experienceKey, child: Section(child: const ExperienceSection())),
+              _sliver(
+                key: _experienceKey,
+                child: Section(child: const ExperienceSection()),
+              ),
               _sliver(child: const Separator()),
-              _sliver(key: _servicesKey, child: Section(child: const ServicesSection())),
+              _sliver(
+                key: _servicesKey,
+                child: Section(child: const ServicesSection()),
+              ),
               _sliver(child: const Separator()),
-              _sliver(key: _projectsKey, child: Section(child: const ProjectsSection())),
+              _sliver(
+                key: _projectsKey,
+                child: Section(child: const ProjectsSection()),
+              ),
               _sliver(child: const Separator()),
-              _sliver(key: _achievementsKey, child: Section(child:  AchievementsSection())),
+              _sliver(
+                key: _achievementsKey,
+                child: Section(child: AchievementsSection()),
+              ),
               _sliver(child: const Separator()),
-              _sliver(key: contactKey, child: Section(child: const ContactSection())),
+              _sliver(
+                key: contactKey,
+                child: Section(child: const ContactSection()),
+              ),
               _sliver(child: const Footer()),
             ],
           ),

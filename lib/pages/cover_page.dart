@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/widgets/AnimatedTextKit.dart';
-import 'package:my_portfolio2/widgets/CTA_Buttons.dart';
-import 'package:my_portfolio2/widgets/LocationAndStatus.dart';
-import 'package:my_portfolio2/widgets/MobileImage.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
+import 'package:my_portfolio2/widgets/animated_text_title.dart';
+import 'package:my_portfolio2/widgets/cta_buttons.dart';
+import 'package:my_portfolio2/widgets/location_and_status.dart';
+import 'package:my_portfolio2/widgets/mobile_image.dart';
 
 class CoverSection extends StatelessWidget {
   final GlobalKey contactKey;
@@ -32,11 +32,9 @@ class CoverSection extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            colorScheme.secondary.withOpacity(.9),
-            colorScheme.primary.withOpacity(.8),
-            // colorScheme.background,
-            isDark ? Colors.black : Color(0xFF02569B), // 👈 بدل الأبيض بخفيف
-            // Colors.black,
+            colorScheme.secondary.withValues(alpha: 0.9),
+            colorScheme.primary.withValues(alpha: 0.8),
+            isDark ? Colors.black : const Color(0xFF02569B),
           ],
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,
@@ -118,7 +116,7 @@ class CoverSection extends StatelessWidget {
                     style: t.bodyLarge?.copyWith(
                       fontFamily: fontFamily,
                       fontSize: isMobile ? 13 : 15,
-                      color: colorScheme.onPrimary.withOpacity(.9),
+                      color: colorScheme.onPrimary.withValues(alpha: 0.9),
                       height: 1.6,
                     ),
                   ).animate().fadeIn(duration: 600.ms),
@@ -132,7 +130,7 @@ class CoverSection extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   // ===== CTA Buttons =====
-                  CTA_Buttons(
+                  CtaButtons(
                     isMobile: isMobile,
                     contactKey: contactKey,
                     locale: locale,

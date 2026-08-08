@@ -7,7 +7,7 @@ class CarouselProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = Theme.of(context).colorScheme.background;
+    final bgColor = Theme.of(context).colorScheme.surface;
 
     return Container(
       color: bgColor, // 👈 لون الخلفية حسب الثيم

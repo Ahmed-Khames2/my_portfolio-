@@ -83,7 +83,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
 
           // 📌 Page indicator + controls
           Container(
-            color: theme.colorScheme.surfaceVariant,
+            color: theme.colorScheme.surfaceContainerHighest,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

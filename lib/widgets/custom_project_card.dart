@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_colors.dart';
 import 'package:my_portfolio2/models/project_data.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
-import 'package:my_portfolio2/pages/ProjectDetailsPage.dart';
+import 'package:my_portfolio2/pages/project_details_page.dart';
 
 class ProjectCard extends StatefulWidget {
   final ProjectModel project;
@@ -27,7 +26,6 @@ class _ProjectCardState extends State<ProjectCard> {
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     final theme = Theme.of(context);
-    final colorScheme = Theme.of(context).colorScheme;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -42,8 +40,8 @@ class _ProjectCardState extends State<ProjectCard> {
             BoxShadow(
               color:
                   _isHovered
-                      ? widget.headerColor.withOpacity(0.5)
-                      : theme.shadowColor.withOpacity(0.1),
+                      ? widget.headerColor.withValues(alpha: 0.5)
+                      : theme.shadowColor.withValues(alpha: 0.1),
               blurRadius: _isHovered ? 20 : 8,
               offset: const Offset(0, 8),
             ),
@@ -63,7 +61,7 @@ class _ProjectCardState extends State<ProjectCard> {
                     gradient: LinearGradient(
                       colors: [
                         widget.headerColor,
-                        widget.headerColor.withOpacity(0.7),
+                        widget.headerColor.withValues(alpha: 0.7),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -86,7 +84,7 @@ class _ProjectCardState extends State<ProjectCard> {
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: widget.headerColor.withOpacity(0.4),
+                              color: widget.headerColor.withValues(alpha: 0.4),
                               blurRadius: 12,
                               offset: const Offset(0, 6),
                             ),
@@ -136,7 +134,7 @@ class _ProjectCardState extends State<ProjectCard> {
                           widget.project.description,
                           style: t.bodyMedium?.copyWith(
                             color: theme.textTheme.bodyMedium?.color
-                                ?.withOpacity(0.8),
+                                ?.withValues(alpha: 0.8),
                             height: 1.4,
                           ),
                           maxLines: 2,
@@ -153,7 +151,7 @@ class _ProjectCardState extends State<ProjectCard> {
                           gradient: LinearGradient(
                             colors: [
                               widget.headerColor,
-                              widget.headerColor.withOpacity(0.4),
+                              widget.headerColor.withValues(alpha: 0.4),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(2),

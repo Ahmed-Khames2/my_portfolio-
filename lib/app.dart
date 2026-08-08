@@ -1,11 +1,10 @@
 // app.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
 import 'package:my_portfolio2/core/cubit/locale_cubit.dart';
 import 'package:my_portfolio2/core/theme/app_theme.dart';
 import 'package:my_portfolio2/core/theme/bloc/theme_bloc.dart';
-import 'package:my_portfolio2/pages/FlutterSplashPage.dart';
 import 'package:my_portfolio2/pages/portfolio_page.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,12 +14,7 @@ class PortfolioDemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        // BlocProvider<LocaleCubit>(create: (_) => LocaleCubit()),
-        BlocProvider<ThemeBloc>(create: (_) => ThemeBloc()..add(GetCuurrentThemeEvent())),
-      ],
-      child: BlocBuilder<LocaleCubit, LocaleState>(
+    return BlocBuilder<LocaleCubit, LocaleState>(
         builder: (context, localeState) {
           return BlocBuilder<ThemeBloc, ThemeState>(
             builder: (context, themeState) {
@@ -65,7 +59,6 @@ class PortfolioDemoApp extends StatelessWidget {
             },
           );
         },
-      ),
-    );
+      );
   }
 }

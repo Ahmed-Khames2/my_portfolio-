@@ -1,12 +1,12 @@
 {
-    "name": "my_portfolio2",
-    "short_name": "my_portfolio2",
+    "name": "Ahmed Khames Portfolio",
+    "short_name": "AK Portfolio",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#0F0F10",
+    "theme_color": "#02569B",
+    "description": "Ahmed Khames — Flutter Developer Portfolio",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {

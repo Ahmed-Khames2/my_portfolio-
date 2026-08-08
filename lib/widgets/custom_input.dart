@@ -1,6 +1,5 @@
 // custom_input.dart
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_colors.dart';
 class Input extends StatelessWidget {
   final String hint;
   final int maxLines;
@@ -19,7 +18,7 @@ class Input extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fillColor = theme.inputDecorationTheme.fillColor ?? theme.colorScheme.surface;
-    final borderColor = theme.colorScheme.onSurface.withOpacity(0.2);
+    final borderColor = theme.colorScheme.onSurface.withValues(alpha: 0.2);
     final focusedColor = theme.colorScheme.primary;
 
     return TextFormField(

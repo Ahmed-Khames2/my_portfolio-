@@ -1,6 +1,5 @@
 /* ========================= SKILL CARD ========================= */
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_colors.dart';
 class SkillCard extends StatelessWidget {
   final String name;
   final double level;
@@ -31,7 +30,7 @@ class SkillCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: bgColor.withOpacity(0.2),
+            color: bgColor.withValues(alpha: 0.2),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -46,7 +45,7 @@ class SkillCard extends StatelessWidget {
             child: Icon(
               icon,
               size: isMobile ? 60 : 100,
-              color: bgColor.withOpacity(0.1),
+              color: bgColor.withValues(alpha: 0.1),
             ),
           ),
 
@@ -70,7 +69,7 @@ class SkillCard extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: level,
                   minHeight: isMobile ? 8 : 10,
-                  backgroundColor: colorScheme.onSurface.withOpacity(0.1),
+                  backgroundColor: colorScheme.onSurface.withValues(alpha: 0.1),
                   color: bgColor,
                 ),
               ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_colors.dart';
 
 class ServiceCard extends StatefulWidget {
   final String title, desc;
@@ -43,14 +42,14 @@ class _ServiceCardState extends State<ServiceCard> {
     final backgroundGradient =
         isActive
             ? [
-              widget.iconColor.withOpacity(0.3),
-              widget.iconColor.withOpacity(0.1),
+              widget.iconColor.withValues(alpha: 0.3),
+              widget.iconColor.withValues(alpha: 0.1),
             ]
             : isDark
-            ? [colorScheme.surfaceVariant, colorScheme.surface]
+            ? [colorScheme.surfaceContainerHighest, colorScheme.surface]
             : [
               colorScheme.surface,
-              colorScheme.surfaceVariant.withOpacity(0.4),
+              colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
             ];
 
     final textColor = colorScheme.onSurface;
@@ -95,15 +94,15 @@ class _ServiceCardState extends State<ServiceCard> {
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
                   colors: [
-                    widget.iconColor.withOpacity(0.6),
-                    widget.iconColor.withOpacity(0.2),
+                    widget.iconColor.withValues(alpha: 0.6),
+                    widget.iconColor.withValues(alpha: 0.2),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: widget.iconColor.withOpacity(0.4),
+                    color: widget.iconColor.withValues(alpha: 0.4),
                     blurRadius: 12,
                     spreadRadius: 1,
                   ),
@@ -135,7 +134,7 @@ class _ServiceCardState extends State<ServiceCard> {
                   textAlign: TextAlign.center,
                   style: textTheme.bodyMedium?.copyWith(
                     fontSize: isActive ? 15 : 13,
-                    color: textColor.withOpacity(0.9),
+                    color: textColor.withValues(alpha: 0.9),
                     height: 1.4,
                   ),
                 ),

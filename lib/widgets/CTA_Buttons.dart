@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
 
-class CTA_Buttons extends StatelessWidget {
-  const CTA_Buttons({
+class CtaButtons extends StatelessWidget {
+  const CtaButtons({
     super.key,
     required this.isMobile,
     required this.contactKey,
@@ -46,7 +46,7 @@ class CTA_Buttons extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 elevation: 8,
-                shadowColor: colorScheme.primary.withOpacity(.5),
+                shadowColor: colorScheme.primary.withValues(alpha: 0.5),
               ),
             )
             .animate()

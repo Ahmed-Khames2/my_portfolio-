@@ -30,38 +30,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   google_fonts: ^6.3.0
   url_launcher: ^6.3.2
   flutter_animate: ^4.5.2
   carousel_slider: ^5.1.1
-  font_awesome_flutter: ^10.9.1
-  animated_background: ^2.0.0
   pdfx: ^2.9.2
   flutter_bloc: ^9.1.1
   shared_preferences: ^2.5.3
-  flutter_localization: ^0.3.3
   animated_text_kit: ^4.2.3
-  scrollable_positioned_list: ^0.3.8
   http: ^1.5.0
-  lottie: ^3.3.1
   equatable: ^2.0.7
-  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^5.0.0
   flutter_native_splash: ^2.4.6
+  flutter_launcher_icons: ^0.14.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

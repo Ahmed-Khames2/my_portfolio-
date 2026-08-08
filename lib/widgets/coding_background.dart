@@ -11,14 +11,10 @@ class CodingBackground extends StatefulWidget {
 
 class _CodingBackgroundState extends State<CodingBackground> {
   final Random _rnd = Random();
-  final int symbolCount = 60;
+  final int symbolCount = 40;
   late List<_CodingSymbol> symbols;
 
   final List<String> symbolsList = [
-    // "{ }",
-    // "< />",
-    // "();",
-    // "=>",
     "1000001",
     "1001011",
     "Flutter",
@@ -33,7 +29,6 @@ class _CodingBackgroundState extends State<CodingBackground> {
     Icons.code,
     Icons.computer,
     Icons.code_off,
-    Icons.flutter_dash,
   ];
 
   @override
@@ -43,10 +38,8 @@ class _CodingBackgroundState extends State<CodingBackground> {
     symbols = List.generate(symbolCount, (index) {
       final isIcon = _rnd.nextBool();
       final angle = _rnd.nextDouble() * 2 * pi;
-
       final speed = 0.0001 + _rnd.nextDouble() * 0.0003;
 
-      // نستخدم متغير placeholder للون، سيتم تغييره لاحقاً في build
       return _CodingSymbol(
         text: isIcon ? null : symbolsList[_rnd.nextInt(symbolsList.length)],
         icon: isIcon ? iconsList[_rnd.nextInt(iconsList.length)] : null,
@@ -55,7 +48,7 @@ class _CodingBackgroundState extends State<CodingBackground> {
         size: 14 + _rnd.nextDouble() * 18,
         dx: cos(angle) * speed,
         dy: sin(angle) * speed,
-        color: Colors.transparent, // placeholder
+        opacityFactor: 0.05 + _rnd.nextDouble() * 0.1,
       );
     });
   }
@@ -76,15 +69,12 @@ class _CodingBackgroundState extends State<CodingBackground> {
           if (s.y > 1) s.y = 0;
           if (s.y < 0) s.y = 1;
 
-          // تحديث اللون حسب الثيم
-          s.color = colorScheme.primary.withOpacity(
-            0.05 + _rnd.nextDouble() * 0.1,
-          );
+          s.color = colorScheme.primary.withValues(alpha: s.opacityFactor);
         }
 
         return CustomPaint(
-          painter: CodingBackgroundPainter(symbols),
-          child: Container(),
+          painter: _CodingBackgroundPainter(symbols),
+          child: const SizedBox.expand(),
         );
       },
     );
@@ -99,6 +89,7 @@ class _CodingSymbol {
   double size;
   double dx;
   double dy;
+  double opacityFactor;
   Color color;
 
   _CodingSymbol({
@@ -109,13 +100,13 @@ class _CodingSymbol {
     required this.size,
     required this.dx,
     required this.dy,
-    required this.color,
-  });
+    required this.opacityFactor,
+  }) : color = Colors.transparent;
 }
 
-class CodingBackgroundPainter extends CustomPainter {
+class _CodingBackgroundPainter extends CustomPainter {
   final List<_CodingSymbol> symbols;
-  CodingBackgroundPainter(this.symbols);
+  _CodingBackgroundPainter(this.symbols);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -155,5 +146,5 @@ class CodingBackgroundPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CodingBackgroundPainter oldDelegate) => true;
+  bool shouldRepaint(covariant _CodingBackgroundPainter oldDelegate) => true;
 }

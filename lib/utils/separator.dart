@@ -7,7 +7,9 @@ class Separator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // ignore: deprecated_member_use
-      height: 1, width: double.infinity, color: AppColors.divider.withOpacity(.5));
+      height: 1,
+      width: double.infinity,
+      color: AppColors.divider.withValues(alpha: 0.5),
+    );
   }
 }

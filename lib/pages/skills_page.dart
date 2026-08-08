@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/widgets/SectionTitle.dart';
-import 'package:my_portfolio2/widgets/cusom_skills_item.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
+import 'package:my_portfolio2/widgets/section_title.dart';
+import 'package:my_portfolio2/widgets/skill_card.dart';
 import 'package:my_portfolio2/widgets/skills_category_title.dart';
 
 /* ========================= SKILLS ========================= */

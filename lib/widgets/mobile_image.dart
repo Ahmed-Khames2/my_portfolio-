@@ -41,7 +41,7 @@ class MobileImage extends StatelessWidget {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.4),
+                            color: Colors.black.withValues(alpha: 0.4),
                             blurRadius: 30,
                             offset: const Offset(0, 12),
                           ),
@@ -50,7 +50,7 @@ class MobileImage extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(28),
                         child: Container(
-                          color: colorScheme.background,
+                          color: colorScheme.surface,
                           child: Center(
                             child: Icon(
                               Icons.flutter_dash,
@@ -69,7 +69,7 @@ class MobileImage extends StatelessWidget {
                         width: 60,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: colorScheme.onBackground,
+                          color: colorScheme.onSurface,
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),

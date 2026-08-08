@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
 
 class AnimatedTitle extends StatelessWidget {
   final bool isMobile;

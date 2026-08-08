@@ -112,11 +112,11 @@
 
   "education_kafr_title": "B.Sc. in Computer Science",
   "education_kafr_subtitle": "Kafr El Sheikh University — 2023–2026",
-  "education_kafr_details": "Current GPA: 3.40 • Focus on Algorithms, Databases, Networking",
+  "education_kafr_details": "GPA: 3.5 • Focus on Algorithms, Databases, Networking",
 
   "education_depi_title": "Digital Egypt Pioneers Initiative",
-  "education_depi_subtitle": "Ongoing — 2024–Present",
-  "education_depi_details": "National initiative focusing on advanced Flutter & Mobile Apps.",
+  "education_depi_subtitle": "DEPI — 2024–2025",
+  "education_depi_details": "Graduated from the Digital Egypt Pioneers Initiative (DEPI) Diploma in Flutter & Mobile Application Development.",
 
   "education_udemy_title": "Flutter Development Bootcamp",
   "education_udemy_subtitle": "Udemy — 2023",
@@ -172,7 +172,10 @@
   "ecom_desc": "A simple e-commerce application with Firebase authentication.",
   "todo_title": "ToDo App",
   "todo_desc": "Description coming soon",
-    "todo_full_desc": "Todo App: features include searching tasks by name, filtering by category, adding/editing/deleting tasks, marking tasks complete, and persistent local storage using SQLite. The app supports both dark and light modes and is fully responsive across mobile devices.",
+  "todo_full_desc": "Todo App: features include searching tasks by name, filtering by category, adding/editing/deleting tasks, marking tasks complete, and persistent local storage using SQLite. The app supports both dark and light modes and is fully responsive across mobile devices.",
+  "education_depi_titlea": "Certificate of (DEPI) - Mobile App Development",
+  "education_depi_subtitlea": "Completed a diploma program in Mobile App Development ",
+  
 
 
     "your_name": "Your Name",

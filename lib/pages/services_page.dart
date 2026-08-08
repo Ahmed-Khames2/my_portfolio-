@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/widgets/SectionTitle.dart';
-import 'package:my_portfolio2/widgets/custom_servised_card.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
+import 'package:my_portfolio2/widgets/section_title.dart';
+import 'package:my_portfolio2/widgets/service_card.dart';
 
 class ServicesSection extends StatefulWidget {
   const ServicesSection({super.key});

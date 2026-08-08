@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_portfolio2/core/cubit/locale_cubit.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
 import 'package:my_portfolio2/core/theme/bloc/theme_bloc.dart';
 import 'package:my_portfolio2/core/theme/app_theme.dart';
 
@@ -111,7 +111,7 @@ class _TopBarState extends State<TopBar> {
                         color:
                             isHovered
                                 ? colorScheme.primary
-                                : colorScheme.onBackground,
+                                : colorScheme.onSurface,
                         decoration:
                             isHovered
                                 ? TextDecoration.underline
@@ -172,13 +172,13 @@ class _TopBarState extends State<TopBar> {
                                     child: Text(
                                       e.tr(context),
                                       style: TextStyle(
-                                        color: colorScheme.onBackground,
+                                        color: colorScheme.onSurface,
                                       ),
                                     ),
                                   ),
                                 )
                                 .toList(),
-                    icon: Icon(Icons.menu, color: colorScheme.onBackground),
+                    icon: Icon(Icons.menu, color: colorScheme.onSurface),
                   ),
                 ],
               )

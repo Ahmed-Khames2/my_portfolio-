@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/widgets/SectionTitle.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
+import 'package:my_portfolio2/widgets/section_title.dart';
 
 class EducationSection extends StatelessWidget {
   const EducationSection({super.key});
@@ -29,10 +29,10 @@ class EducationSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: colorScheme.surface,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: colorScheme.outline.withOpacity(.4)),
+              border: Border.all(color: colorScheme.outline.withValues(alpha: 0.4)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
+                  color: Colors.black.withValues(alpha: 0.04),
                   blurRadius: 14,
                   offset: const Offset(0, 6),
                 ),
@@ -50,7 +50,7 @@ class EducationSection extends StatelessWidget {
                   colorScheme: colorScheme,
                 ),
                 const SizedBox(height: 14),
-                Divider(color: colorScheme.outline.withOpacity(.3), height: 1),
+                Divider(color: colorScheme.outline.withValues(alpha: 0.3), height: 1),
                 const SizedBox(height: 14),
 
                 EducationRow(
@@ -63,7 +63,7 @@ class EducationSection extends StatelessWidget {
                   colorScheme: colorScheme,
                 ),
                 const SizedBox(height: 14),
-                Divider(color: colorScheme.outline.withOpacity(.3), height: 1),
+                Divider(color: colorScheme.outline.withValues(alpha: 0.3), height: 1),
                 const SizedBox(height: 14),
 
                 EducationRow(
@@ -76,7 +76,7 @@ class EducationSection extends StatelessWidget {
                   colorScheme: colorScheme,
                 ),
                 const SizedBox(height: 14),
-                Divider(color: colorScheme.outline.withOpacity(.3), height: 1),
+                Divider(color: colorScheme.outline.withValues(alpha: 0.3), height: 1),
                 const SizedBox(height: 14),
 
                 EducationRow(
@@ -116,7 +116,7 @@ class EducationRow extends StatelessWidget {
     required this.colorScheme,
     this.barWidth = 4,
     double? imageWidth,
-  }) : imageWidth = imageWidth ?? (700 < 700 ? 56 : 84);
+  }) : imageWidth = imageWidth ?? (isMobile ? 56 : 84);
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +134,7 @@ class EducationRow extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   colorScheme.primary,
-                  colorScheme.primary.withOpacity(.65),
+                  colorScheme.primary.withValues(alpha: 0.65),
                 ],
               ),
             ),
@@ -154,8 +154,8 @@ class EducationRow extends StatelessWidget {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.black.withOpacity(0.06),
-                          Colors.black.withOpacity(0.02),
+                          Colors.black.withValues(alpha: 0.06),
+                          Colors.black.withValues(alpha: 0.02),
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -191,7 +191,7 @@ class EducationRow extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: textTheme.bodyMedium?.copyWith(
-                      color: colorScheme.onSurface.withOpacity(.7),
+                      color: colorScheme.onSurface.withValues(alpha: 0.7),
                       fontSize: isMobile ? 12.5 : 14,
                     ),
                   ),
@@ -199,7 +199,7 @@ class EducationRow extends StatelessWidget {
                   Text(
                     details,
                     style: textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurface.withOpacity(.6),
+                      color: colorScheme.onSurface.withValues(alpha: 0.6),
                       height: 1.35,
                       fontSize: isMobile ? 12 : 13,
                     ),

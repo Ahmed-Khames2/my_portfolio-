@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/pages/PdfViewerPage.dart';
+import 'package:my_portfolio2/pages/pdf_viewer_page.dart';
 import 'package:my_portfolio2/utils/helpers.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/widgets/SectionTitle.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
+import 'package:my_portfolio2/widgets/section_title.dart';
 import 'package:my_portfolio2/widgets/form_contact.dart';
 import 'package:my_portfolio2/core/app_colors.dart';
 
@@ -34,7 +34,7 @@ class ContactSection extends StatelessWidget {
             runSpacing: 12,
             children: [
               ElevatedButton.icon(
-                onPressed: () => openUrl("mailto:your@email.com"),
+                onPressed: () => openUrl("mailto:ahmedkham1234567@gmail.com"),
                 icon: const Icon(Icons.mail_outline),
                 label: Text("email_me".tr(context)),
                 style: ElevatedButton.styleFrom(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_portfolio2/widgets/custom_input.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
 
 class FormContact extends StatefulWidget {
   const FormContact({super.key});
@@ -17,6 +17,14 @@ class _FormContactState extends State<FormContact> {
   final messageController = TextEditingController();
 
   bool _isLoading = false;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    messageController.dispose();
+    super.dispose();
+  }
 
   final String scriptUrl =
       "https://script.google.com/macros/s/AKfycbyF1YbPhpky6NyjwmEP88mqiJX1Sj-4eRdx-KMPo5-wbJpPf_lWvaEiR4IpV_cqZFX6/exec";
@@ -40,14 +48,21 @@ class _FormContactState extends State<FormContact> {
       nameController.clear();
       emailController.clear();
       messageController.clear();
+
+      if (!mounted) return;
       FocusScope.of(context).unfocus();
 
       _showDialog("success_title".tr(context), "success_msg".tr(context));
     } catch (e) {
-      _showDialog("error_title".tr(context), "${"error_msg".tr(context)}\n$e");
-      // print(e);
+      if (!mounted) return;
+      _showDialog(
+        "error_title".tr(context),
+        "${"error_msg".tr(context)}\nCheck internet",
+      );
     } finally {
-      setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
@@ -71,7 +86,7 @@ class _FormContactState extends State<FormContact> {
             content: Text(
               message,
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.9),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.9),
               ),
             ),
             actions: [
@@ -121,8 +136,9 @@ class _FormContactState extends State<FormContact> {
                 hint: "your_email".tr(context),
                 controller: emailController,
                 validator: (value) {
-                  if (value == null || value.isEmpty)
+                  if (value == null || value.isEmpty) {
                     return "validate_email".tr(context);
+                  }
                   if (!RegExp(
                     r"^[\w-\.]+@([\w-]+\.)+[\w]{2,4}",
                   ).hasMatch(value)) {

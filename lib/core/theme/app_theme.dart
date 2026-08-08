@@ -20,8 +20,6 @@ final appThemeData = {
       onPrimary: Colors.white,
       secondary: AppColors.lightSecondary,
       onSecondary: Colors.white,
-      background: const Color(0xFFF2F4F7), // 👈 رمادي فاتح مريح
-      onBackground: AppColors.lightTextPrimary,
       surface: const Color(0xFFFFFFFF), // card/background فاتح
       onSurface: AppColors.lightTextSecondary,
       error: AppColors.error,
@@ -96,8 +94,6 @@ final appThemeData = {
       onPrimary: Colors.white, // لازم فاتح يبان فوق الأزرق الغامق
       secondary: AppColors.darkSecondary,
       onSecondary: Colors.black,
-      background: AppColors.darkBackground,
-      onBackground: AppColors.darkTextPrimary,
       surface: AppColors.darkSurface,
       onSurface: AppColors.darkTextSecondary,
       error: AppColors.error,

@@ -1,35 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio2/core/app_locallizatin.dart';
-import 'package:my_portfolio2/widgets/SectionTitle.dart';
+import 'package:my_portfolio2/core/app_localization.dart';
+import 'package:my_portfolio2/widgets/section_title.dart';
 
 class AchievementsSection extends StatelessWidget {
-  AchievementsSection({super.key}); //error
+  const AchievementsSection({super.key});
 
-  final List<Map<String, dynamic>> items = [
+  static const List<Map<String, dynamic>> items = [
     {
-      "title": "udemy_dart".tr, //error
-      "subtitle": "udemy_dart_desc".tr, //error
+      "titleKey": "udemy_dart",
+      "subtitleKey": "udemy_dart_desc",
       "image": "assets/images/c1jpg.jpg",
       "icon": Icons.school,
       "iconColor": Colors.blue,
     },
     {
-      "title": "udemy_flutter".tr, //error
-      "subtitle": "udemy_flutter_desc".tr, //error
+      "titleKey": "udemy_flutter",
+      "subtitleKey": "udemy_flutter_desc",
       "image": "assets/images/c1jpg.jpg",
       "icon": Icons.school,
       "iconColor": Colors.orange,
     },
     {
-      "title": "first_app".tr, //error
-      "subtitle": "first_app_desc".tr, //error
+      "titleKey": "education_depi_titlea",
+      "subtitleKey": "education_depi_subtitlea",
+      "image": "assets/images/DEPI_CERTIFICATE.jpeg",
+      "icon": Icons.school,
+      "iconColor": Colors.blue,
+    },
+    {
+      "titleKey": "first_app",
+      "subtitleKey": "first_app_desc",
       "downloads": "500+",
       "icon": Icons.phone_android,
       "iconColor": Colors.green,
     },
     {
-      "title": "volunteer_proj".tr, //error
-      "subtitle": "volunteer_proj_desc".tr, //error
+      "titleKey": "volunteer_proj",
+      "subtitleKey": "volunteer_proj_desc",
       "icon": Icons.groups,
       "iconColor": Colors.purple,
     },
@@ -44,7 +51,7 @@ class AchievementsSection extends StatelessWidget {
         children: [
           SectionTitle("achievements".tr(context)),
           const SizedBox(height: 16),
-          ...items.map((item) => _buildListItem(context, item)).toList(),
+          ...items.map((item) => _buildListItem(context, item)),
         ],
       ),
     );
@@ -53,6 +60,8 @@ class AchievementsSection extends StatelessWidget {
   Widget _buildListItem(BuildContext context, Map<String, dynamic> item) {
     bool hasImage = item.containsKey("image");
     bool hasDownloads = item.containsKey("downloads");
+    final title = (item["titleKey"] as String).tr(context);
+    final subtitle = (item["subtitleKey"] as String).tr(context);
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -60,8 +69,8 @@ class AchievementsSection extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         leading: Icon(item["icon"], color: item["iconColor"], size: 32),
-        title: Text(item["title"](context)),
-        subtitle: Text(item["subtitle"](context)),
+        title: Text(title),
+        subtitle: Text(subtitle),
         onTap:
             (hasImage || hasDownloads)
                 ? () {
@@ -88,8 +97,7 @@ class AchievementsSection extends StatelessWidget {
                                       InteractiveViewer(
                                         panEnabled: false,
                                         minScale: 1,
-                                        maxScale:
-                                            3, // تقدر تكبر/تصغر الصورة لو حبيت
+                                        maxScale: 3,
                                         child: LayoutBuilder(
                                           builder: (context, constraints) {
                                             final screenWidth =
@@ -103,15 +111,31 @@ class AchievementsSection extends StatelessWidget {
 
                                             return Image.asset(
                                               item["image"],
-                                              fit:
-                                                  BoxFit
-                                                      .contain, // يخليها كاملة بدون ما تتاكل
-                                              width:
-                                                  screenWidth *
-                                                  0.9, // تاخد 90% من عرض الشاشة
-                                              height:
-                                                  screenHeight *
-                                                  0.6, // 60% من ارتفاع الشاشة
+                                              fit: BoxFit.contain,
+                                              width: screenWidth * 0.9,
+                                              height: screenHeight * 0.6,
+                                              // 🟢 هنا نضيف frameBuilder للـ loader
+                                              frameBuilder: (
+                                                BuildContext context,
+                                                Widget child,
+                                                int? frame,
+                                                bool wasSynchronouslyLoaded,
+                                              ) {
+                                                if (wasSynchronouslyLoaded) {
+                                                  return child;
+                                                }
+                                                return frame == null
+                                                    ? SizedBox(
+                                                      width: screenWidth * 0.9,
+                                                      height:
+                                                          screenHeight * 0.6,
+                                                      child: const Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      ),
+                                                    )
+                                                    : child;
+                                              },
                                             );
                                           },
                                         ),
@@ -130,60 +154,71 @@ class AchievementsSection extends StatelessWidget {
                           ),
                     );
                   } else if (hasDownloads) {
-                    showDialog(
-                      context: context,
-                      builder:
-                          (_) => Dialog(
-                            backgroundColor: Colors.transparent,
-                            insetPadding: const EdgeInsets.all(32),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Container(
-                                width: 300,
-                                color: Colors.white,
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      item["title"](context),
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 12),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.download,
-                                          color: Colors.green,
-                                          size: 28,
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          "${"downloads".tr(context)}: ${item["downloads"]}",
-                                          style: const TextStyle(fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 12),
-                                    ElevatedButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text("close".tr(context)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                    );
+                    _showDownloadsDialog(context, item);
                   }
                 }
                 : null,
       ),
+    );
+  }
+
+  Future<dynamic> _showDownloadsDialog(
+    BuildContext context,
+    Map<String, dynamic> item,
+  ) {
+    final title = (item["titleKey"] as String).tr(context);
+    return showDialog(
+      context: context,
+      builder:
+          (_) => Dialog(
+            backgroundColor: Colors.transparent,
+            insetPadding: const EdgeInsets.all(32),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Container(
+                width: 300,
+                color: Theme.of(context).colorScheme.surface,
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.download,
+                          color: Colors.green,
+                          size: 28,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          "${"downloads".tr(context)}: ${item["downloads"]}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text("close".tr(context)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
     );
   }
 }
