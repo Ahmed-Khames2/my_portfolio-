@@ -52,12 +52,15 @@ class _FormContactState extends State<FormContact> {
       if (!mounted) return;
       FocusScope.of(context).unfocus();
 
-      _showDialog("success_title".tr(context), "success_msg".tr(context));
+      _showSnackBar(
+        message: "success_msg".tr(context),
+        isSuccess: true,
+      );
     } catch (e) {
       if (!mounted) return;
-      _showDialog(
-        "error_title".tr(context),
-        "${"error_msg".tr(context)}\nCheck internet",
+      _showSnackBar(
+        message: "error_msg".tr(context),
+        isSuccess: false,
       );
     } finally {
       if (mounted) {
@@ -66,114 +69,138 @@ class _FormContactState extends State<FormContact> {
     }
   }
 
-  void _showDialog(String title, String message) {
-    final theme = Theme.of(context);
-
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+  void _showSnackBar({required String message, required bool isSuccess}) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        backgroundColor: isSuccess ? Colors.green.shade700 : Colors.red.shade700,
+        duration: const Duration(seconds: 4),
+        content: Row(
+          children: [
+            Icon(
+              isSuccess ? Icons.check_circle_outline : Icons.error_outline,
+              color: Colors.white,
             ),
-            backgroundColor: theme.colorScheme.surface,
-            title: Text(
-              title,
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: theme.colorScheme.onSurface,
-              ),
-            ),
-            content: Text(
-              message,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.9),
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  FocusScope.of(context).unfocus();
-                },
-                child: Text(
-                  "ok".tr(context),
-                  style: TextStyle(color: theme.colorScheme.primary),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Form(
       key: _formKey,
       child: AbsorbPointer(
         absorbing: _isLoading,
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: theme.dividerColor),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
+                blurRadius: 16,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Name Field
               Input(
                 hint: "your_name".tr(context),
                 controller: nameController,
-                validator:
-                    (value) =>
-                        value == null || value.isEmpty
-                            ? "validate_name".tr(context)
-                            : null,
+                prefixIcon: Icons.person_outline,
+                validator: (value) =>
+                    value == null || value.trim().isEmpty
+                        ? "validate_name".tr(context)
+                        : null,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
+
+              // Email Field
               Input(
                 hint: "your_email".tr(context),
                 controller: emailController,
+                prefixIcon: Icons.email_outlined,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return "validate_email".tr(context);
                   }
                   if (!RegExp(
                     r"^[\w-\.]+@([\w-]+\.)+[\w]{2,4}",
-                  ).hasMatch(value)) {
+                  ).hasMatch(value.trim())) {
                     return "validate_email_format".tr(context);
                   }
                   return null;
                 },
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
+
+              // Message Field
               Input(
                 hint: "your_message".tr(context),
                 maxLines: 5,
                 controller: messageController,
-                validator:
-                    (value) =>
-                        value == null || value.isEmpty
-                            ? "validate_message".tr(context)
-                            : null,
+                prefixIcon: Icons.chat_bubble_outline,
+                validator: (value) =>
+                    value == null || value.trim().isEmpty
+                        ? "validate_message".tr(context)
+                        : null,
               ),
-              const SizedBox(height: 12),
-              Align(
-                alignment: Alignment.centerRight,
-                child:
-                    _isLoading
-                        ? CircularProgressIndicator(
+              const SizedBox(height: 20),
+
+              // Submit Button
+              SizedBox(
+                height: 50,
+                child: _isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
                           color: theme.colorScheme.primary,
-                        )
-                        : ElevatedButton(
-                          onPressed: sendMessage,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: theme.colorScheme.primary,
-                            foregroundColor: theme.colorScheme.onPrimary,
-                          ),
-                          child: Text("send_message".tr(context)),
                         ),
+                      )
+                    : ElevatedButton.icon(
+                        onPressed: sendMessage,
+                        icon: const Icon(Icons.send_rounded, size: 20),
+                        label: Text(
+                          "send_message".tr(context),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: theme.colorScheme.primary,
+                          foregroundColor: theme.colorScheme.onPrimary,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),

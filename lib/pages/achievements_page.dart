@@ -60,7 +60,7 @@ class AchievementsSection extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 2.6,
+                mainAxisExtent: 130,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
@@ -117,7 +117,7 @@ class _AchievementCardState extends State<_AchievementCard> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOutCubic,
-          transform: Matrix4.identity()..scale(_isHovered && isClickable ? 1.025 : 1.0, _isHovered && isClickable ? 1.025 : 1.0),
+          transform: Matrix4.identity()..scale(_isHovered && isClickable ? 1.02 : 1.0, _isHovered && isClickable ? 1.02 : 1.0),
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(16),
@@ -148,22 +148,23 @@ class _AchievementCardState extends State<_AchievementCard> {
                   child: Container(color: accentColor),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Icon Avatar
                       Container(
-                        width: 48,
-                        height: 48,
+                        width: 46,
+                        height: 46,
                         decoration: BoxDecoration(
                           color: accentColor.withValues(alpha: 0.12),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(item["icon"], color: accentColor, size: 26),
+                        child: Icon(item["icon"], color: accentColor, size: 24),
                       ),
                       const SizedBox(width: 14),
 
-                      // Text Content
+                      // Text Content + Badge under text
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,13 +173,13 @@ class _AchievementCardState extends State<_AchievementCard> {
                             Text(
                               title,
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 3),
                             Text(
                               subtitle,
                               style: TextStyle(
@@ -188,81 +189,46 @@ class _AchievementCardState extends State<_AchievementCard> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
+                            if (isClickable) ...[
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: (hasImage ? accentColor : Colors.green).withValues(alpha: 0.12),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      hasImage ? Icons.visibility : Icons.download,
+                                      size: 13,
+                                      color: hasImage ? accentColor : Colors.green,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(
+                                      hasImage ? "view_certificate".tr(context) : "view_details".tr(context),
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                        color: hasImage ? accentColor : Colors.green,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ],
                         ),
                       ),
 
-                      const SizedBox(width: 8),
-
-                      // Right Side: Thumbnail Preview or Hint Badge
-                      if (hasImage) ...[
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Thumbnail Preview
-                            Container(
-                              width: 44,
-                              height: 44,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: accentColor.withValues(alpha: 0.4),
-                                  width: 1,
-                                ),
-                                image: DecorationImage(
-                                  image: AssetImage(item["image"]),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: accentColor.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(Icons.visibility, size: 12, color: accentColor),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    "view_certificate".tr(context),
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                      color: accentColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
-                      ] else if (hasDownloads) ...[
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.green.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(Icons.download, size: 14, color: Colors.green),
-                              const SizedBox(width: 4),
-                              Text(
-                                "view_details".tr(context),
-                                style: const TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
+                      if (isClickable) ...[
+                        const SizedBox(width: 8),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 14,
+                          color: accentColor.withValues(alpha: 0.6),
+                        ),
                       ],
                     ],
                   ),
