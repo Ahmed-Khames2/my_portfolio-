@@ -117,7 +117,7 @@ class _AchievementCardState extends State<_AchievementCard> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOutCubic,
-          transform: Matrix4.identity()..scale(_isHovered && isClickable ? 1.02 : 1.0, _isHovered && isClickable ? 1.02 : 1.0),
+          transform: Matrix4.diagonal3Values(_isHovered && isClickable ? 1.02 : 1.0, _isHovered && isClickable ? 1.02 : 1.0, 1.0),
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(16),

@@ -21,8 +21,8 @@ class Input extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final fillColor = theme.inputDecorationTheme.fillColor ?? theme.colorScheme.surface;
-    final borderColor = theme.colorScheme.onSurface.withValues(alpha: 0.15);
+    final fillColor = theme.colorScheme.surface;
+    final borderColor = theme.colorScheme.onSurface.withValues(alpha: 0.12);
     final focusedColor = theme.colorScheme.primary;
 
     return TextFormField(
@@ -33,20 +33,27 @@ class Input extends StatelessWidget {
       style: TextStyle(
         fontSize: 15,
         color: theme.colorScheme.onSurface,
+        fontFamily: 'Cairo',
       ),
       decoration: InputDecoration(
+        alignLabelWithHint: maxLines > 1,
         hintText: hint,
         hintStyle: TextStyle(
           fontSize: 14,
           color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+          fontFamily: 'Cairo',
         ),
         prefixIcon: prefixIcon != null
-            ? Padding(
-                padding: EdgeInsets.only(bottom: maxLines > 1 ? (maxLines * 12.0) : 0),
-                child: Icon(
-                  prefixIcon,
-                  size: 20,
-                  color: theme.colorScheme.primary.withValues(alpha: 0.8),
+            ? Container(
+                alignment: maxLines > 1 ? Alignment.topCenter : Alignment.center,
+                width: 48,
+                child: Padding(
+                  padding: EdgeInsets.only(top: maxLines > 1 ? 16.0 : 0),
+                  child: Icon(
+                    prefixIcon,
+                    size: 20,
+                    color: theme.colorScheme.primary.withValues(alpha: 0.85),
+                  ),
                 ),
               )
             : null,
@@ -77,3 +84,4 @@ class Input extends StatelessWidget {
     );
   }
 }
+

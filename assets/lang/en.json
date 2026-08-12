@@ -84,7 +84,7 @@
   "udemy_dart_desc": "Completed a course and earned a certificate in Dart programming.",
   "udemy_flutter": "Udemy Certificate – Flutter",
   "udemy_flutter_desc": "Completed a course and earned a certificate in Flutter development.",
-  "first_app": "First App: ALQuds",
+  "first_app": "First App: Zad Al-Mu'min",
   "first_app_desc": "Developed my first Islamic app with Prayer Times, Quran offline, Azkar, and more.",
   "volunteer_proj": "Volunteer Project – University",
   "volunteer_proj_desc": "Contributed in a university volunteer team building a Quality Management app.",
@@ -150,9 +150,9 @@
 
   
   "projectsTitle": "Projects",
-  "alqudsTitle": "AlQuds",
-  "alqudsDescription": "A complete Islamic app without internet access.",
-  "alqudsFullDesc": "ALQuds ✨ All-in-one Islamic app: Quran, Azkar, and Prayer times offline!",
+  "alqudsTitle": "Zad Al-Mu'min",
+  "alqudsDescription": "A complete offline Islamic companion app.",
+  "alqudsFullDesc": "Zad Al-Mu'min is a comprehensive Islamic app that works fully offline. It includes the Holy Quran with recitation, daily Azkar (morning & evening), accurate Prayer Times with Adhan, Qibla direction, Hijri calendar, and more. Built with Flutter using clean architecture and BLoC state management.",
   "ecomTitle": "E-Commerce App",
   "ecomDescription": "A simple e-commerce application to browse products, view details, and add items to the cart with Firebase authentication.",
   "ecomFullDesc": "This project is a basic E-Commerce application built with Flutter...",
@@ -168,8 +168,8 @@
   "by_ahmed": "by Ahmed Khamis",
 
   "projects": "Projects",
-  "alquds_title": "AlQuds",
-  "alquds_desc": "An offline Islamic app with Quran, Azkar, and Prayer Times.",
+  "alquds_title": "Zad Al-Mu'min",
+  "alquds_desc": "An offline Islamic app with Quran, Azkar, Prayer Times and more.",
   "ecom_title": "E-Commerce App",
   "ecom_desc": "A simple e-commerce application with Firebase authentication.",
   "todo_title": "ToDo App",

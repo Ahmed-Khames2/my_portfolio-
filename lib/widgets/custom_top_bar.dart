@@ -96,28 +96,38 @@ class _TopBarState extends State<TopBar> {
             items.map((e) {
               final isHovered = hoveredItem == e;
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
                   onEnter: (_) => setState(() => hoveredItem = e),
                   onExit: (_) => setState(() => hoveredItem = ""),
                   child: GestureDetector(
                     onTap: () => widget.onNav(e),
-                    child: AnimatedDefaultTextStyle(
+                    child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
                         color:
                             isHovered
-                                ? colorScheme.primary
-                                : colorScheme.onSurface,
-                        decoration:
-                            isHovered
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
+                                ? colorScheme.primary.withValues(alpha: 0.12)
+                                : Colors.transparent,
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Text(e.tr(context)),
+                      child: Text(
+                        e.tr(context),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight:
+                              isHovered ? FontWeight.bold : FontWeight.w500,
+                          color:
+                              isHovered
+                                  ? colorScheme.primary
+                                  : colorScheme.onSurface,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -128,13 +138,13 @@ class _TopBarState extends State<TopBar> {
 
     return AppBar(
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-      elevation: 2,
+      scrolledUnderElevation: 4,
+      elevation: 0,
       leadingWidth: 0,
       title:
           isMobile
               ? Row(
                 children: [
-                  // الاسم أصغر على الموبايل
                   RichText(
                     text: TextSpan(
                       children: [
@@ -142,16 +152,19 @@ class _TopBarState extends State<TopBar> {
                           text: 'Ahmed'.tr(context),
                           style: TextStyle(
                             color: colorScheme.primary,
-                            fontSize: 16, // أصغر حجم من الويب
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'Cairo',
                           ),
                         ),
+                        const TextSpan(text: ' '),
                         TextSpan(
                           text: 'Khames'.tr(context),
                           style: TextStyle(
                             color: colorScheme.secondary,
-                            fontSize: 16, // أصغر حجم من الويب
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'Cairo',
                           ),
                         ),
                       ],
@@ -160,8 +173,11 @@ class _TopBarState extends State<TopBar> {
                   const Spacer(),
                   languageIcon(),
                   themeSwitch(),
-                  // أيقونة المنيو على اليمين
                   PopupMenuButton<String>(
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     onSelected: widget.onNav,
                     itemBuilder:
                         (c) =>
@@ -169,16 +185,27 @@ class _TopBarState extends State<TopBar> {
                                 .map(
                                   (e) => PopupMenuItem<String>(
                                     value: e,
-                                    child: Text(
-                                      e.tr(context),
-                                      style: TextStyle(
-                                        color: colorScheme.onSurface,
-                                      ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: colorScheme.primary,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          e.tr(context),
+                                          style: TextStyle(
+                                            color: colorScheme.onSurface,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 )
                                 .toList(),
-                    icon: Icon(Icons.menu, color: colorScheme.onSurface),
+                    icon: Icon(Icons.menu_rounded, color: colorScheme.onSurface),
                   ),
                 ],
               )
@@ -191,16 +218,19 @@ class _TopBarState extends State<TopBar> {
                           text: 'Ahmed'.tr(context),
                           style: TextStyle(
                             color: colorScheme.primary,
-                            fontSize: 20, // حجم الويب يبقى أكبر
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'Cairo',
                           ),
                         ),
+                        const TextSpan(text: ' '),
                         TextSpan(
                           text: 'Khames'.tr(context),
                           style: TextStyle(
                             color: colorScheme.secondary,
-                            fontSize: 20, // حجم الويب يبقى أكبر
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'Cairo',
                           ),
                         ),
                       ],
@@ -208,6 +238,7 @@ class _TopBarState extends State<TopBar> {
                   ),
                   const Spacer(),
                   menuLinks(),
+                  const SizedBox(width: 12),
                   languageIcon(),
                   themeSwitch(),
                 ],
